@@ -1,2 +1,2 @@
-# Fitness Tracker App
+# Toned
 

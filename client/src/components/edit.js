@@ -73,7 +73,7 @@ export default function Edit() {
       <h3>Update Exercise</h3>
       <form onSubmit={onSubmit}>
         <div>
-          <label htmlFor="workout">workout </label>
+          <label htmlFor="workout">Workout </label>
           <select
             id="workout"
             onChange={(e) => updateForm({ workout: e.target.value })}
@@ -99,7 +99,7 @@ export default function Edit() {
         </div>
 
         <div>
-          <label htmlFor="sets">sets </label>
+          <label htmlFor="sets">Sets </label>
           <input
             type="text"
             id="sets"
@@ -109,17 +109,17 @@ export default function Edit() {
         </div>
 
         <div>
-          <label htmlFor="reps">reps </label>
+          <label htmlFor="reps">Reps </label>
           <input
             type="text"
             id="reps"
-            value={form.sets}
+            value={form.reps}
             onChange={(e) => updateForm({ reps: e.target.value })}
           />
         </div>
 
         <div>
-          <label htmlFor="weight">sets </label>
+          <label htmlFor="weight">Weight </label>
           <input
             type="text"
             id="weight"

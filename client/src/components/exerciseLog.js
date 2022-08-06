@@ -19,6 +19,7 @@ const Exercise = (props) => (
 export default function ExerciseLog() {
   const [exercises, setExercises] = useState([])
   console.log({ exercises })
+
   // This method fetches the records from the database
   useEffect(() => {
     async function getExercises() {
@@ -34,6 +35,7 @@ export default function ExerciseLog() {
       setExercises(exercises)
     }
     getExercises()
+
     return
   }, [exercises.length])
 
@@ -44,6 +46,7 @@ export default function ExerciseLog() {
     })
     const newExercises = exercises.filter((el) => el._id !== id)
     setExercises(newExercises)
+    console.log({ exercises })
   }
 
   // This method will map out the records on the table

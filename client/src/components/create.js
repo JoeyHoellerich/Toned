@@ -71,45 +71,38 @@ export default function Create() {
           /> */}
         </div>
 
-        <div className="form-group">
+        <div>
           <label htmlFor="sets">Sets</label>
           <input
             type="text"
-            className="form-control"
             id="sets"
             value={form.sets}
             onChange={(e) => updateForm({ sets: e.target.value })}
           />
         </div>
 
-        <div className="form-group">
+        <div>
           <label htmlFor="reps">Reps</label>
           <input
             type="text"
-            className="form-control"
             id="reps"
             value={form.reps}
             onChange={(e) => updateForm({ reps: e.target.value })}
           />
         </div>
 
-        <div className="form-group">
+        <div>
           <label htmlFor="weight">Weight</label>
           <input
             type="text"
-            className="form-control"
             id="weight"
             value={form.weight}
             onChange={(e) => updateForm({ weight: e.target.value })}
           />
         </div>
 
-        <div className="form-group">
-          <input
-            type="submit"
-            value="Add exercise"
-            className="btn btn-primary"
-          />
+        <div>
+          <input type="submit" value="Add exercise" />
         </div>
       </form>
     </div>

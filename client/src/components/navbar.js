@@ -16,6 +16,9 @@ export default function Navbar() {
         <div>
           <ul>
             <li>
+              <NavLink to="/createUser">Log In</NavLink>
+            </li>
+            <li>
               <NavLink to="/create">Create Exercise</NavLink>
             </li>
           </ul>

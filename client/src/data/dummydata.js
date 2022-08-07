@@ -1,4 +1,4 @@
-const DummyExercises = [
+export const DummyExercises = [
     {
     "_id": "62ec22c5b1bb9a6fd48408bc",
     "user": {
@@ -78,23 +78,22 @@ const DummyExercises = [
     }
   ]
 
-
-  const DummyUsers = [
-    {
-        "_id": "62ed82a3ceeac87434260eac",
-        "username": "lee"
-    },
-    {
-        "_id": "62ed8e86ceeac87434260eae",
-        "username": "joe"
-    },
-    {
-        "_id": "62ed8f5bceeac87434260eaf",
-        "username": "rob"
-    },
-    {
-        "_id": "62ee726f69c90a06c1c3ead2",
-        "username": "joey"
-    }
+export const DummyUsers = [
+  {
+      "_id": "62ed82a3ceeac87434260eac",
+      "username": "lee"
+  },
+  {
+      "_id": "62ed8e86ceeac87434260eae",
+      "username": "joe"
+  },
+  {
+      "_id": "62ed8f5bceeac87434260eaf",
+      "username": "rob"
+  },
+  {
+      "_id": "62ee726f69c90a06c1c3ead2",
+      "username": "joey"
+  }
 ]
 

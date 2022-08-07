@@ -2,3 +2,4 @@ green highlight: #9EFFC5
 dark background: #2D3339
 light grey accent: #535D65
 off white: #E4E4E4
+editYellow: #F6C971

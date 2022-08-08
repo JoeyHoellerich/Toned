@@ -5,6 +5,9 @@ import EditOffOutlinedIcon from '@mui/icons-material/EditOffOutlined';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 
+import DetailsTable from "./DetailsTable";
+import EditTable from "./EditTable";
+
 
 export default function ExpandCard(props) {
 
@@ -96,14 +99,14 @@ export default function ExpandCard(props) {
             <Collapse in={detailOpen} unmountOnExit>
                 <Container>
                     {/* Replace with Table */}
-                    <p>Here is a table of data</p>
+                    <DetailsTable />
                 </Container>
             </Collapse>
             {/* Collapse for Edit - Opens when edit button is clicked */}
             <Collapse in={editOpen} unmountOnExit>
                 <Container>
                     {/* Replace with Editable Table */}
-                    <p>Here is an editable table of data</p>
+                    <EditTable />
                 </Container>
             </Collapse>
         </div>

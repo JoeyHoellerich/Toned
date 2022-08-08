@@ -12,7 +12,8 @@ const exerciseSchema = new Schema({
   weight: { type: Number },
   date: { type: Date, default: () => Date.now() },
   user: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
 
     ref: "User",
   },

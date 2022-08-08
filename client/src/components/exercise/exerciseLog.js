@@ -63,10 +63,23 @@ export default function ExerciseLog() {
     })
   }
 
+  function welcomePage() {
+    return (
+      <div>
+        <h1>Welcome!</h1>
+        <p>
+          You don't appear to have any previous workouts recorded. Try adding a
+          new workout using the "Add Workout" button at the bottom of the screen
+        </p>
+        <button>ADD WORKOUT</button>
+      </div>
+    )
+  }
+  console.log(exerciseList().length)
   // This following section will display the table with the records of individuals.
   return (
     <div>
-      <h3>Exercise List</h3>
+      {exerciseList().length === 0 ? welcomePage() : <h3>Exercise List</h3>}
       <table style={{ marginTop: 20 }}>
         <thead>
           <tr>

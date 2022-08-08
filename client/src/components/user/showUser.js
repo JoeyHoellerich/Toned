@@ -44,7 +44,7 @@ export default function ShowUser() {
 
   return (
     <div>
-      <h3>{userValue != "" ? `Welcome: ${userValue}` : ""}</h3>
+      <h3>{userValue !== "" ? `Welcome: ${userValue}` : ""}</h3>
       <form>
         <label htmlFor="username">Select User: </label>
         <select id={"username"} onChange={(e) => setUserValue(e.target.value)}>

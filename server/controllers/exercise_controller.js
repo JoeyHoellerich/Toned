@@ -5,7 +5,7 @@ const Exercise = require("../models/exercise")
 
 // get exercise @route "/exercise"
 exercise.get("/", async (req, res) => {
-  if (!req.body.workout) {
+  if (!req.body) {
     res.status(400)
     throw new Error("workout not found")
   }

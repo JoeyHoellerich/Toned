@@ -2,6 +2,13 @@ body {
   background-color: #2D3339;
 }
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
 /* Styling for the Table Container */
 .MuiTableContainer-root {
   border: 4px solid white;

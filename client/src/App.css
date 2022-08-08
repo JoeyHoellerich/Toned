@@ -12,3 +12,13 @@ body {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+/* Styling for Date above workout group */
+.workoutDate {
+  color: #E4E4E4;
+  font-weight: 400;
+  font-style: italic;
+  font-size: large;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}

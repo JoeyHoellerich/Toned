@@ -3,15 +3,18 @@ const exercise = express.Router()
 // Exercise model
 const Exercise = require("../models/exercise")
 
-// get exercise @route "/exercise"
+// get exercise @route "/exercise" by a specific userid, then sorts it by latest date to earliest
 exercise.get("/", async (req, res) => {
-  if (!req.body) {
-    res.status(400)
-    throw new Error("workout not found")
-  }
-  const exercise = await Exercise.find()
+  const exercise = await Exercise.find({ user: req.query.userid }).sort('-date')
   res.status(200).json(exercise)
 })
+
+// get exercise @route "/exercise" by a specific userid, and a specific date. then sorts it by latest date to earliest
+exercise.get("/", async (req, res) => {
+  const exercise = await Exercise.find({ user: req.query.userid, date: req.query.date }).sort('-date')
+  res.status(200).json(exercise)
+})
+
 
 // create exercise @ route "/exercise"
 exercise.post("/", async (req, res) => {

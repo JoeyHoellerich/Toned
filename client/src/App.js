@@ -12,23 +12,21 @@ import Create from "./components/exercise/create"
 import CreateUser from "./components/user/createUser"
 import ShowUser from "./components/user/showUser"
 import UserLogin from "./components/user/userLogin"
+import PastWorkouts from "./components/PastWorkouts/PastWorkouts"
 
 
 
 function App() {
   return (
     <div className="App">
-      <img src={tonedtitle} width="100%" alt="toned" />
-      <img src={logo} className="App-logo" alt="logo" />
-      <ShowUser />
-      <UserLogin />
+      <Navbar />
       <Routes>
         <Route exact path="/" element={<ExerciseLog />} />
         <Route path="/createuser" element={<CreateUser />} />
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/pastworkouts" element={<PastWorkouts />} />
       </Routes>
-      <Navbar />
     </div>
   )
 }

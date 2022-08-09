@@ -3,7 +3,7 @@ import { Box, Container } from "@mui/material"
 
 import ExpandCard from './ExpandCard'
 
-export default function WorkoutDayCard() {
+export default function WorkoutDayCard(props) {
 
     const workoutContainerStyle = [
         {marginBottom: "20px"},
@@ -21,9 +21,11 @@ export default function WorkoutDayCard() {
         <Container sx = {workoutContainerStyle}>
             <h2 className='workoutDate'>Monday, 8 Aug 2022</h2>
             <Box sx = {workoutBoxStyle}>
-                <ExpandCard name = "Workout 1"/>
-                <ExpandCard name = "Workout 2"/>
-                <ExpandCard name = "Workout 3"/>
+                {props.data.map((exercise, index) => {
+                    return(
+                        <ExpandCard name = {exercise.workout}/>
+                    )
+                })}
             </Box>
         </Container>
     )

@@ -1,7 +1,5 @@
 import React from "react"
 import { Route, Routes } from "react-router-dom"
-import logo from "./imgs/toned-logo.svg"
-import tonedtitle from "./imgs/toned-title.svg"
 import "./App.css"
 
 // We import all the components we need in our app
@@ -13,6 +11,7 @@ import CreateUser from "./components/user/createUser"
 import ShowUser from "./components/user/showUser"
 import UserLogin from "./components/user/userLogin"
 import PastWorkouts from "./components/PastWorkouts/PastWorkouts"
+import EditWorkout from "./components/exercise/EditWorkout"
 
 
 
@@ -26,6 +25,7 @@ function App() {
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="/create" element={<Create />} />
         <Route path="/pastworkouts" element={<PastWorkouts />} />
+        <Route path="/editworkout" element={<EditWorkout />} />
       </Routes>
     </div>
   )

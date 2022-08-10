@@ -12,6 +12,7 @@ import ShowUser from "./components/user/showUser"
 import UserLogin from "./components/user/userLogin"
 import PastWorkouts from "./components/PastWorkouts/PastWorkouts"
 import EditWorkout from "./components/exercise/EditWorkout"
+import AddWorkout from "./components/AddWorkout";
 
 
 
@@ -24,11 +25,12 @@ function App() {
         <Route path="/createuser" element={<CreateUser />} />
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/add" element={<AddWorkout />} />
         <Route path="/pastworkouts" element={<PastWorkouts />} />
         <Route path="/editworkout" element={<EditWorkout />} />
       </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

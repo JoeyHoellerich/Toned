@@ -2,16 +2,48 @@ const express = require("express")
 const exercise = express.Router()
 // Exercise model
 const Exercise = require("../models/exercise")
+const User = require("../models/user")
 
-// get exercise @route "/exercise"
+// get all exercises @ "/exercise"
 exercise.get("/", async (req, res) => {
   if (!req.body) {
     res.status(400)
     throw new Error("workout not found")
   }
   const exercise = await Exercise.find()
+
   res.status(200).json(exercise)
 })
+
+// get user by username & specific workout related to user
+// @ "/exercise/exercises?username=&workout="
+exercise.get("/:id", async (req, res) => {
+  const user = await User.find({ username: req.query.username }).then(
+    (foundUser) => {
+      const exercise = Exercise.find({
+        user: foundUser,
+        workout: req.query.workout,
+      })
+        .populate({
+          path: "user",
+        })
+        .then((foundWorkout) => {
+          res.status(200).json({ user: foundUser, exercise: foundWorkout })
+        })
+    }
+  )
+})
+
+// // query exercise by date. no sure if its working
+// exercise.get("/:date", async (req, res) => {
+//   const exercise = await Exercise.find({
+//     user: req.query.user,
+//     created_on: {
+//       $gte: new Date(req.params.date),
+//     },
+//   }).sort("-date")
+//   res.status(200).json(exercise)
+// })
 
 // create exercise @ route "/exercise"
 exercise.post("/", async (req, res) => {

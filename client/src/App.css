@@ -1,5 +1,5 @@
 body {
-  background-color: #2D3339;
+  background-color: #2d3339;
 }
 
 .center {
@@ -22,10 +22,17 @@ body {
 
 /* Styling for Date above workout group */
 .workoutDate {
-  color: #E4E4E4;
+  color: #e4e4e4;
   font-weight: 400;
   font-style: italic;
   font-size: large;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
+}
+/* jlee added these styles for testing. can be deleted if not needed */
+* {
+  color: white;
+}
+button {
+  color: black;
 }

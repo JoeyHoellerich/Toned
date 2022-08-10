@@ -13,8 +13,8 @@ const exerciseSchema = new Schema({
   date: { type: Date, default: () => Date.now() },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
 
+    required: true,
     ref: "User",
   },
 })

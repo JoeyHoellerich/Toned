@@ -1,5 +1,5 @@
 body {
-  background-color: #2D3339;
+  background-color: #2d3339;
 }
 
 .center {
@@ -22,7 +22,7 @@ body {
 
 /* Styling for Date above workout group */
 .workoutDate {
-  color: #E4E4E4;
+  color: #e4e4e4;
   font-weight: 400;
   font-style: italic;
   font-size: large;
@@ -56,4 +56,5 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+
 }

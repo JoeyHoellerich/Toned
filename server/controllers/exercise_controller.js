@@ -1,26 +1,26 @@
 const express = require("express")
 const exercise = express.Router()
+const moment = require('moment')
 // Exercise model
 const Exercise = require("../models/exercise")
 
 
-// get exercise @route "/exercise" by a specific userid, and a specific date. then sorts it by latest date to earliest
+// get exercise @route "/exercise" by a specific userid, grabs the workouts by current date up to a queried amount of days in the past, default is 30 days.
 
-// THIS GET REQ I AM HAVING TROUBLE WITH
-
-exercise.get("/:date", async (req, res) => {
+exercise.get("/", async (req, res) => {
   const exercise = await Exercise.find({ user: req.query.userid,
-  created_on: {
-    $gte: new Date(req.params.date)
+  date: {
+    $lt: moment(),
+    $gte: moment().subtract(req.query.days || 30, 'days')
   }}).sort('-date')
   res.status(200).json(exercise)
 })
 
 // get exercise @route "/exercise" by a specific userid, then sorts it by latest date to earliest
-exercise.get("/", async (req, res) => {
-  const exercise = await Exercise.find({ user: req.query.userid }).sort('-date')
-  res.status(200).json(exercise)
-})
+// exercise.get("/", async (req, res) => {
+//   const exercise = await Exercise.find({ user: req.query.userid }).sort('-date')
+//   res.status(200).json(exercise)
+// })
 
 
 

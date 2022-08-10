@@ -72,6 +72,7 @@ export default function ExerciseLog() {
           new workout using the "Add Workout" button at the bottom of the screen
         </p>
         <button>ADD WORKOUT</button>
+        <button><Link to={`/pastworkouts`}>Past Workouts</Link></button>
       </div>
     )
   }

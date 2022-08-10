@@ -64,7 +64,6 @@ exercise.get("/:user/specific/:workout", async (req, res) => {
   }).then((foundUser) => {
     const exercise = Exercise.find({
       user: foundUser,
-
       workout: req.params.workout,
     })
       .populate({
@@ -76,16 +75,6 @@ exercise.get("/:user/specific/:workout", async (req, res) => {
   })
 })
 
-// // query exercise by date. no sure if its working
-// exercise.get("/:date", async (req, res) => {
-//   const exercise = await Exercise.find({
-//     user: req.query.user,
-//     created_on: {
-//       $gte: new Date(req.params.date),
-//     },
-//   }).sort("-date")
-//   res.status(200).json(exercise)
-// })
 
 // create exercise @ route "/exercise"
 exercise.post("/", async (req, res) => {

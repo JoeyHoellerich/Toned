@@ -18,10 +18,10 @@ user.get("/", async (req, res) => {
   res.status(200).json(user)
 })
 
-// get user @ "/user/users?username="
+// get user @ "/user/username"
 // query for user by username. Returns user and all exercises related to user
-user.get("/:id", async (req, res) => {
-  const user = await User.find({ username: req.query.username }).populate({
+user.get("/:username", async (req, res) => {
+  const user = await User.find({ username: req.params.username }).populate({
     path: "exercises",
   })
 

@@ -10,27 +10,23 @@ exercise.get("/data/seed", async (req, res) => {
   await Exercise.insertMany(tbExerciseSeedData)
 })
 
-// get all exercises @ "/exercise"
-exercise.get("/", async (req, res) => {
-  if (!req.body) {
-    res.status(400)
-    throw new Error("workout not found")
-  }
-  const exercise = await Exercise.find()
+// // get all exercises @ "/exercise"
+// exercise.get("/", async (req, res) => {
 
-  res.status(200).json(exercise)
-})
+//   const exercise = await Exercise.find()
+
+//   res.status(200).json(exercise)
+// })
 
 // get user by username & specific workout related to user
-// @ "/exercise/exercises?username=&workout="
-exercise.get("/:id", async (req, res) => {
+// @ "/exercise/username/workout="
+exercise.get("/:username/:workout", async (req, res) => {
   const user = await User.find({
-    username: req.query.username,
+    username: req.params.username,
   }).then((foundUser) => {
     const exercise = Exercise.find({
       user: foundUser,
-
-      workout: req.query.workout,
+      workout: req.params.workout,
     })
       .populate({
         path: "user",

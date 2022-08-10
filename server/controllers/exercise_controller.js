@@ -1,5 +1,6 @@
 const express = require("express")
 const exercise = express.Router()
+const moment = require('moment')
 // Exercise model
 const Exercise = require("../models/exercise")
 const User = require("../models/user")
@@ -10,27 +11,61 @@ exercise.get("/data/seed", async (req, res) => {
   await Exercise.insertMany(tbExerciseSeedData)
 })
 
-// get all exercises @ "/exercise"
-exercise.get("/", async (req, res) => {
-  if (!req.body) {
-    res.status(400)
-    throw new Error("workout not found")
-  }
-  const exercise = await Exercise.find()
-
-  res.status(200).json(exercise)
+// get user's exercises @ "/exercise/(username)"
+// Query ?back=(how many days in the past), default is 30 days
+exercise.get("/:user", async (req, res) => {
+  const user = await User.find({
+    username: req.params.user,
+  }).then((foundUser) => {
+    const exercise = Exercise.find({
+      user: foundUser,
+      date: {
+        $gte: moment().subtract(req.query.back || 30, 'days')
+      }
+    })
+      .populate({
+        path: "user",
+      })
+      .sort('-date')
+      .then((foundWorkouts) => {
+        res.status(200).json({user: foundUser, workouts: foundWorkouts})
+      })
+  })
+})
+// get user's exercises from a specific date @"/exercise/(username)/dates"
+// Query ?startday=(date in YYYYMMDD format), required query term
+// Query ?back=(how many days in the past), default is 30 days
+exercise.get("/:user/dates", async (req, res) => {
+  const user = await User.find({
+    username: req.params.user,
+  }).then((foundUser) => {
+    const exercise = Exercise.find({
+      user: foundUser,
+      date: {
+        $lt: moment(`${req.query.startday}`, "YYYYMMDD"),
+        $gte: moment().subtract(req.query.back || 30, 'days')
+      }
+    })
+      .populate({
+        path: "user",
+      })
+      .sort('-date')
+      .then((foundWorkouts) => {
+        res.status(200).json({user: foundUser, workouts: foundWorkouts})
+      })
+  })
 })
 
 // get user by username & specific workout related to user
 // @ "/exercise/exercises?username=&workout="
-exercise.get("/:id", async (req, res) => {
+exercise.get("/:user/specific/:workout", async (req, res) => {
   const user = await User.find({
-    username: req.query.username,
+    username: req.params.user,
   }).then((foundUser) => {
     const exercise = Exercise.find({
       user: foundUser,
 
-      workout: req.query.workout,
+      workout: req.params.workout,
     })
       .populate({
         path: "user",

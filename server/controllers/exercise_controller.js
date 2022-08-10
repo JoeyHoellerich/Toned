@@ -43,7 +43,7 @@ exercise.get("/:user/dates", async (req, res) => {
       user: foundUser,
       date: {
         $lt: moment(`${req.query.startday}`, "YYYYMMDD"),
-        $gte: moment().subtract(req.query.back || 30, 'days')
+        $gte: moment(`${req.query.startday}`, "YYYYMMDD").subtract(req.query.back || 30, 'days')
       }
     })
       .populate({

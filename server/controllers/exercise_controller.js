@@ -10,7 +10,6 @@ const Exercise = require("../models/exercise")
 exercise.get("/", async (req, res) => {
   const exercise = await Exercise.find({ user: req.query.userid,
   date: {
-    $lt: moment(),
     $gte: moment().subtract(req.query.days || 30, 'days')
   }}).sort('-date')
   res.status(200).json(exercise)

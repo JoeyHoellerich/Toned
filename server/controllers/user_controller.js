@@ -1,7 +1,11 @@
 const express = require("express")
 const user = express.Router()
 const User = require("../models/user")
-const Exercise = require("../models/exercise")
+const userSeedData = require("../models/seeders/user_seed")
+// test
+user.get("/data/seed", async (req, res) => {
+  await User.insertMany(userSeedData)
+})
 
 // get user @ "/user"
 // show  all users

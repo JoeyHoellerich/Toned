@@ -3,6 +3,12 @@ const exercise = express.Router()
 // Exercise model
 const Exercise = require("../models/exercise")
 const User = require("../models/user")
+const exerciseSeedData = require("../models/seeders/exercise_seed")
+const tbExerciseSeedData = require("../models/seeders/tbExercise_seed")
+
+exercise.get("/data/seed", async (req, res) => {
+  await Exercise.insertMany(tbExerciseSeedData)
+})
 
 // get all exercises @ "/exercise"
 exercise.get("/", async (req, res) => {
@@ -18,20 +24,21 @@ exercise.get("/", async (req, res) => {
 // get user by username & specific workout related to user
 // @ "/exercise/exercises?username=&workout="
 exercise.get("/:id", async (req, res) => {
-  const user = await User.find({ username: req.query.username }).then(
-    (foundUser) => {
-      const exercise = Exercise.find({
-        user: foundUser,
-        workout: req.query.workout,
+  const user = await User.find({
+    username: req.query.username,
+  }).then((foundUser) => {
+    const exercise = Exercise.find({
+      user: foundUser,
+
+      workout: req.query.workout,
+    })
+      .populate({
+        path: "user",
       })
-        .populate({
-          path: "user",
-        })
-        .then((foundWorkout) => {
-          res.status(200).json({ user: foundUser, exercise: foundWorkout })
-        })
-    }
-  )
+      .then((foundWorkout) => {
+        res.status(200).json({ user: foundUser, exercise: foundWorkout })
+      })
+  })
 })
 
 // // query exercise by date. no sure if its working

@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router"
+import { Link } from "react-router-dom"
 
 export default function Create() {
   const [form, setForm] = useState({
@@ -102,7 +103,9 @@ export default function Create() {
         </div>
 
         <div>
-          <input type="submit" value="Add exercise" />
+          <Link to="/exerciselog">
+            <input type="submit" value="Add exercise" />
+          </Link>
         </div>
       </form>
     </div>

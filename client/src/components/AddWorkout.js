@@ -1,8 +1,13 @@
-import React, { useState } from "react";
-import {FormControl, Button, Input} from "@mui/material";
-import { FormGroup, InputLabel } from "@mui/material";
+import React, { useState } from "react"
+import {
+  FormGroup,
+  InputLabel,
+  Input,
+  Button,
+  FormControl,
+} from "@mui/material"
 
-export default function AddWorkout () {
+export default function AddWorkout() {
   return (
     <div>
       <h1>Add Workout</h1>
@@ -32,5 +37,5 @@ export default function AddWorkout () {
         Log Workout
       </Button>
     </div>
-  );
-};
+  )
+}

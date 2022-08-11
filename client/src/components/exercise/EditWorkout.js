@@ -47,7 +47,7 @@ export default function EditWorkout(props){
     
         // This will send a post request to update the data in the database.
         await fetch(`http://localhost:3000/update/${params.id}`, {
-          method: "POST",
+          method: "PUT",
           body: JSON.stringify(editedExercise),
           headers: {
             "Content-Type": "application/json",

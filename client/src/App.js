@@ -4,6 +4,7 @@ import "./App.css"
 
 // We import all the components we need in our app
 import Navbar from "./components/navbar/navbar"
+import Nav from "./components/navbar/Nav"
 import ExerciseLog from "./components/exercise/exerciseLog"
 import Edit from "./components/exercise/edit"
 import Create from "./components/exercise/create"
@@ -19,7 +20,7 @@ import AddWorkout from "./components/AddWorkout";
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      <Nav />
       <Routes>
         <Route exact path="/" element={<ExerciseLog />} />
         <Route path="/createuser" element={<CreateUser />} />

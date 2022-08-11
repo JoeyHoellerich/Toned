@@ -124,7 +124,7 @@ export default function EditWorkout(props){
                             <h2 className="tonedInputLabel">Reps</h2>
                             <input 
                                 className="tonedInput" 
-                                name="reps" id="sets-input" 
+                                name="reps" id="reps-input" 
                                 type="number" 
                                 defaultValue={workoutData.reps}
                                 onChange={e => updateForm({reps: e.target.value})}

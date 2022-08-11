@@ -1,5 +1,8 @@
 import React, { useState } from "react"
+import { Container, Box} from "@mui/material"
 import { useNavigate } from "react-router"
+import addWorkoutTitle from "../../imgs/addworkout-title.svg"
+import Navbar from "../navbar/Nav"
 
 export default function Create() {
   const [form, setForm] = useState({
@@ -8,7 +11,13 @@ export default function Create() {
     reps: "",
     weight: "",
   })
+
   const navigate = useNavigate()
+
+  const inputBoxStyle = [
+    {margin: "auto"},
+    {paddingBottom: "15px"}
+  ] 
 
   // These methods will update the state properties
   function updateForm(value) {
@@ -38,73 +47,106 @@ export default function Create() {
     setForm({ workout: "", sets: "", reps: "", weight: "" })
     navigate("/")
   }
+
+  function utcToLocale() {
+    let date = new Date()
+    var dd = date.getDate(); 
+    var mm = date.getMonth()+1;
+    var yyyy = date.getFullYear(); 
+    if(dd<10){dd='0'+dd} 
+    if(mm<10){mm='0'+mm};
+    return (`${yyyy}-${mm}-${dd}`)
+}
   // This following section will display the form that takes the input from the user
 
   return (
     <div>
-      <h3>Create New Exercise Log</h3>
-      <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label htmlFor="workout">Workout</label>
-          <select
-            id="workout"
-            onChange={(e) => updateForm({ workout: e.target.value })}
-          >
-            <option value={"Select Workout"}>Select Workout</option>
-            <option value={"Bench Press"}>Bench Press</option>
-            <option value={"Incline Bench Press"}>Incline Bench Press</option>
-            <option value={"Decline Bench Press"}>Decline Bench Press</option>
-            <option value={"Squat"}>Squat</option>
-            <option value={"Leg Press"}>Leg Press</option>
-            <option value={"Romanian Deadlift"}>Romanian Deadlift</option>
-            <option value={"Deadlift"}>Deadlift</option>
-            <option value={"Lat Pulldown"}>Lat Pulldown</option>
-            <option value={"Pull-Ups"}>Pull-Ups</option>
-            <option value={"Push-Ups"}>Push-Ups</option>
-          </select>
-          {/* <input
-            type="text"
-            className="form-control"
-            id="workout"
-            value={form.workout}
-            onChange={(e) => updateForm({ workout: e.target.value })}
-          /> */}
-        </div>
-
-        <div>
-          <label htmlFor="sets">Sets</label>
-          <input
-            type="text"
-            id="sets"
-            value={form.sets}
-            onChange={(e) => updateForm({ sets: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="reps">Reps</label>
-          <input
-            type="text"
-            id="reps"
-            value={form.reps}
-            onChange={(e) => updateForm({ reps: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="weight">Weight</label>
-          <input
-            type="text"
-            id="weight"
-            value={form.weight}
-            onChange={(e) => updateForm({ weight: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <input type="submit" value="Add exercise" />
-        </div>
-      </form>
-    </div>
+      <Navbar />
+          <img src={addWorkoutTitle} alt="Edit Workout" className="center" />
+          <Container>
+              <form onSubmit={onSubmit}>
+                  <Box sx={inputBoxStyle}>
+                      <label className="center">
+                          <h2 className="tonedInputLabel">Workout</h2>
+                          <select className="tonedInput"
+                              id="workout-select"
+                              onChange={(e) => updateForm({ workout: e.target.value })}
+                              style={{width: "99.5%", height: "2.5em"}}
+                              value={form.workout}
+                          >
+                              <option value={"Select Workout"}>Select Workout</option>
+                              <option value={"Bench Press"}>Bench Press</option>
+                              <option value={"Incline Bench Press"}>Incline Bench Press</option>
+                              <option value={"Decline Bench Press"}>Decline Bench Press</option>
+                              <option value={"Squat"}>Squat</option>
+                              <option value={"Leg Press"}>Leg Press</option>
+                              <option value={"Romanian Deadlift"}>Romanian Deadlift</option>
+                              <option value={"Deadlift"}>Deadlift</option>
+                              <option value={"Lat Pulldown"}>Lat Pulldown</option>
+                              <option value={"Pull-Ups"}>Pull-Ups</option>
+                              <option value={"Push-Ups"}>Push-Ups</option>
+                          </select>
+                      </label>
+                  </Box>
+                  <Box sx={inputBoxStyle}>
+                      <label className="center">
+                          <h2 className="tonedInputLabel">Sets</h2>
+                          <input 
+                              className="tonedInput" 
+                              name="sets" id="sets-input" 
+                              type="number" 
+                              onChange={e => updateForm({sets: e.target.value})}
+                              value={form.sets}
+                          />
+                      </label>
+                  </Box>
+                  <Box sx={inputBoxStyle}>
+                      <label className="center">
+                          <h2 className="tonedInputLabel">Reps</h2>
+                          <input 
+                              className="tonedInput" 
+                              name="reps" id="reps-input" 
+                              type="number" 
+                              onChange={e => updateForm({reps: e.target.value})}
+                              value={form.reps}
+                          />
+                      </label>
+                  </Box>
+                  <Box sx={inputBoxStyle}>
+                      <label className="center">
+                          <h2 className="tonedInputLabel">Weight</h2>
+                          <input 
+                              className="tonedInput" 
+                              name="weight" id="weight-input" 
+                              type="number" 
+                              onChange={e => updateForm({weight: e.target.value})}
+                              value={form.weight}
+                          />
+                      </label>
+                  </Box>
+                  <Box sx={inputBoxStyle}>
+                      <label className="center">
+                          <h2 className="tonedInputLabel">Date</h2>
+                          <input 
+                              className="tonedInput" 
+                              name="reps" id="sets-input" 
+                              type="date" 
+                              style = {{"height" : "2.5em"}}
+                              defaultValue = {utcToLocale()}
+                              onChange={e => updateForm({
+                                  date: e.target.value
+                              })}
+                              value={form.date}
+                          />
+                      </label>
+                  </Box>
+                  <Box sx={inputBoxStyle}>
+                      <div className="center">
+                          <button type="submit" className="tonedButton">Add Workout</button>
+                      </div>
+                  </Box>
+              </form>
+          </Container>
+      </div>
   )
 }

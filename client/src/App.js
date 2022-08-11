@@ -14,15 +14,15 @@ import UserLogin from "./components/user/userLogin"
 import PastWorkouts from "./components/PastWorkouts/PastWorkouts"
 import EditWorkout from "./components/exercise/EditWorkout"
 import AddWorkout from "./components/AddWorkout";
+import Login from "./components/user/Login"
 
 
 
 function App() {
   return (
     <div className="App">
-      <Nav />
       <Routes>
-        <Route exact path="/" element={<ExerciseLog />} />
+        <Route exact path="/" element={<Login />} />
         <Route path="/createuser" element={<CreateUser />} />
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="/create" element={<Create />} />

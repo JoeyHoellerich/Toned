@@ -71,8 +71,12 @@ export default function ExerciseLog() {
           You don't appear to have any previous workouts recorded. Try adding a
           new workout using the "Add Workout" button at the bottom of the screen
         </p>
-        <button>ADD WORKOUT</button>
-        <button><Link to={`/pastworkouts`}>Past Workouts</Link></button>
+        <Link to="/create">
+          <button>ADD WORKOUT</button>
+        </Link>
+        <button>
+          <Link to={`/pastworkouts`}>Past Workouts</Link>
+        </button>
       </div>
     )
   }

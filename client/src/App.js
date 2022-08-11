@@ -1,4 +1,4 @@
-import React from "react"
+import { React } from "react"
 import { Route, Routes } from "react-router-dom"
 import "./App.css"
 
@@ -12,16 +12,15 @@ import ShowUser from "./components/user/showUser"
 import UserLogin from "./components/user/userLogin"
 import PastWorkouts from "./components/PastWorkouts/PastWorkouts"
 import EditWorkout from "./components/exercise/EditWorkout"
-import AddWorkout from "./components/AddWorkout";
-
-
+import AddWorkout from "./components/AddWorkout"
 
 function App() {
   return (
     <div className="App">
       <Navbar />
       <Routes>
-        <Route exact path="/" element={<ExerciseLog />} />
+        <Route path="/" element={<UserLogin />} />
+        <Route path="/exerciselog" element={<ExerciseLog />} />
         <Route path="/createuser" element={<CreateUser />} />
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="/create" element={<Create />} />
@@ -30,7 +29,7 @@ function App() {
         <Route path="/editworkout" element={<EditWorkout />} />
       </Routes>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

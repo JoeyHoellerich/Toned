@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router"
+import { Link } from "react-router-dom"
 
 export default function CreateUser() {
   const [form, setForm] = useState({
@@ -86,7 +87,9 @@ export default function CreateUser() {
         </div>
 
         <div>
-          <input type="submit" value="Create Account" />
+          <Link to="/">
+            <input type="submit" value="Create Account" />
+          </Link>
         </div>
       </form>
     </div>

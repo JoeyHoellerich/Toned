@@ -1,5 +1,6 @@
 const express = require("express")
 const exercise = express.Router()
+const moment = require('moment')
 // Exercise model
 const Exercise = require("../models/exercise")
 const User = require("../models/user")
@@ -10,19 +11,56 @@ exercise.get("/data/seed", async (req, res) => {
   await Exercise.insertMany(tbExerciseSeedData)
 })
 
-// // get all exercises @ "/exercise"
-// exercise.get("/", async (req, res) => {
-
-//   const exercise = await Exercise.find()
-
-//   res.status(200).json(exercise)
-// })
+// get user's exercises @ "/exercise/(username)"
+// Query ?back=(how many days in the past), default is 30 days
+exercise.get("/:user", async (req, res) => {
+  const user = await User.find({
+    username: req.params.user,
+  }).then((foundUser) => {
+    const exercise = Exercise.find({
+      user: foundUser,
+      date: {
+        $gte: moment().subtract(req.query.back || 30, 'days')
+      }
+    })
+      .populate({
+        path: "user",
+      })
+      .sort('-date')
+      .then((foundWorkouts) => {
+        res.status(200).json({user: foundUser, workouts: foundWorkouts})
+      })
+  })
+})
+// get user's exercises from a specific date @"/exercise/(username)/dates"
+// Query ?startday=(date in YYYYMMDD format), required query term
+// Query ?back=(how many days in the past), default is 30 days
+exercise.get("/:user/dates", async (req, res) => {
+  const user = await User.find({
+    username: req.params.user,
+  }).then((foundUser) => {
+    const exercise = Exercise.find({
+      user: foundUser,
+      date: {
+        $lt: moment(`${req.query.startday}`, "YYYYMMDD"),
+        $gte: moment(`${req.query.startday}`, "YYYYMMDD").subtract(req.query.back || 30, 'days')
+      }
+    })
+      .populate({
+        path: "user",
+      })
+      .sort('-date')
+      .then((foundWorkouts) => {
+        res.status(200).json({user: foundUser, workouts: foundWorkouts})
+      })
+  })
+})
 
 // get user by username & specific workout related to user
-// @ "/exercise/username/workout="
-exercise.get("/:username/:workout", async (req, res) => {
+// @ "/exercise/exercises?username=&workout="
+exercise.get("/:user/specific/:workout", async (req, res) => {
   const user = await User.find({
-    username: req.params.username,
+    username: req.params.user,
   }).then((foundUser) => {
     const exercise = Exercise.find({
       user: foundUser,
@@ -37,16 +75,6 @@ exercise.get("/:username/:workout", async (req, res) => {
   })
 })
 
-// // query exercise by date. no sure if its working
-// exercise.get("/:date", async (req, res) => {
-//   const exercise = await Exercise.find({
-//     user: req.query.user,
-//     created_on: {
-//       $gte: new Date(req.params.date),
-//     },
-//   }).sort("-date")
-//   res.status(200).json(exercise)
-// })
 
 // create exercise @ route "/exercise"
 exercise.post("/", async (req, res) => {

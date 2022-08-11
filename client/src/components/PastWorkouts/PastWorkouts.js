@@ -2,6 +2,7 @@ import React from "react"
 import WorkoutDayCard from "./WorkoutDayCard"
 import pastWorkoutTitle from "../../imgs/pastworkouts-title.svg"
 import { Container } from "@mui/material"
+import Navbar from "../navbar/Nav"
 
 // Mock Data
 const data = [[{
@@ -104,6 +105,8 @@ const data = [[{
 
 export default function PastWorkouts(){
     return(
+      <div>
+        <Navbar />
         <Container>
             <img className="center" alt="Past Workouts" src = {pastWorkoutTitle} />
             {data.map((exercises, index) => {
@@ -112,5 +115,6 @@ export default function PastWorkouts(){
                 )
             })}
         </Container>
+      </div>
     )
 }

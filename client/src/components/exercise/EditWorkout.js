@@ -1,4 +1,4 @@
-import { Container, Box, Button } from "@mui/material"
+import { Container, Box} from "@mui/material"
 import React, {useState} from "react"
 import editWorkoutTitle from "../../imgs/editworkout-title.svg"
 import { useParams, useNavigate } from "react-router"
@@ -55,7 +55,7 @@ export default function EditWorkout(props){
         })
     
         navigate("/")
-      }
+    }
 
     function updateForm(value) {
         return setForm((prev) => {
@@ -124,7 +124,7 @@ export default function EditWorkout(props){
                             <h2 className="tonedInputLabel">Reps</h2>
                             <input 
                                 className="tonedInput" 
-                                name="reps" id="sets-input" 
+                                name="reps" id="reps-input" 
                                 type="number" 
                                 defaultValue={workoutData.reps}
                                 onChange={e => updateForm({reps: e.target.value})}

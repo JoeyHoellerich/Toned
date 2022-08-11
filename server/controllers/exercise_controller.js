@@ -69,6 +69,7 @@ exercise.get("/:user/specific/:workout", async (req, res) => {
       .populate({
         path: "user",
       })
+      .sort('-date')
       .then((foundWorkout) => {
         res.status(200).json({ user: foundUser, exercise: foundWorkout })
       })

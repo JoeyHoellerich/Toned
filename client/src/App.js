@@ -1,4 +1,4 @@
-import React from "react"
+import { React } from "react"
 import { Route, Routes } from "react-router-dom"
 import "./App.css"
 
@@ -9,7 +9,6 @@ import CreateUser from "./components/user/createUser"
 import PastWorkouts from "./components/PastWorkouts/PastWorkouts"
 import EditWorkout from "./components/exercise/EditWorkout"
 import Login from "./components/user/Login"
-
 
 
 function App() {
@@ -25,7 +24,7 @@ function App() {
         <Route path="/editworkout" element={<EditWorkout />} />
       </Routes>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

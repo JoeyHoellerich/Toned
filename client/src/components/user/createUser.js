@@ -2,8 +2,8 @@ import React, { useState } from "react"
 import { Box, IconButton } from "@mui/material"
 import { useNavigate } from "react-router"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-
 import createUserTitle from "../../imgs/signup-title.svg"
+
 
 export default function CreateUser() {
 

@@ -1,13 +1,12 @@
 import React, {useState} from "react"
 import { Container, Box } from "@mui/material"
-import { useParams, useNavigate } from "react-router"
+import { useNavigate } from "react-router"
 
 import tonedTitle from "../../imgs/toned-title.svg"
 import tonedLogo from "../../imgs/toned-logo.svg"
 
 export default function Login(){
 
-    const params = useParams()
     const navigate = useNavigate()
 
     const [user, setUser] = useState("")
@@ -15,7 +14,7 @@ export default function Login(){
 
     function changeUser(e){
         setUser(e.target.value)
-        if(user == ""){
+        if(user === ""){
             setIsUser(false)
         }
     }
@@ -24,16 +23,20 @@ export default function Login(){
         e.preventDefault()
     
         // Check to see if user is in database
-        let userObject = await fetch(`http://localhost:5000/user/${user}`, {
+        let response = await fetch(`http://localhost:3000/user/${user}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
         })
+
+        // returns response as an array of objects, for user it is just 1 object
+        let userObject = await response.json()
     
         // if the user exists 
-        if (userObject.headers.get("content-length") > 2){
-            console.log(userObject)
+        if (userObject.length > 0){
+            let user = userObject[0].username
+            navigate(`/pastworkouts?user=${user}`)
         } else {
             setIsUser(true)
         }

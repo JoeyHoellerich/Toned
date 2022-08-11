@@ -1,5 +1,5 @@
 import * as React from "react";
-import { NavLink } from "react-router-dom"
+import { NavLink} from "react-router-dom"
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,7 +12,13 @@ import Menu from "@mui/material/Menu";
 import logo from "../../imgs/toned-logo.svg"
 import logoTitle from "../../imgs/toned-title.svg"
 
-export default function Navbar() {
+export default function Navbar(props) {
+
+  let username = props.user
+
+  React.useEffect(() => {
+    console.log(props)
+  })
 
   const NavBarStyle = [
     {backgroundColor: "#535D65"},
@@ -64,8 +70,8 @@ export default function Navbar() {
                   onClose={handleClose}
                 >
                   <NavLink style={NavLinkStyle} to="/"><MenuItem onClick={handleClose}>Home</MenuItem></NavLink>
-                  <NavLink style={NavLinkStyle} to="/add"><MenuItem onClick={handleClose}>Add Workout</MenuItem></NavLink>
-                  <NavLink style={NavLinkStyle} to="/pastworkouts"><MenuItem onClick={handleClose}>Past Workouts</MenuItem></NavLink>
+                  <NavLink style={NavLinkStyle} to={{pathname: `/add?user=${username}`}}><MenuItem onClick={handleClose}>Add Workout</MenuItem></NavLink>
+                  <NavLink style={NavLinkStyle} to={{pathname: `/pastworkouts?user=${username}`}}><MenuItem onClick={handleClose}>Past Workouts</MenuItem></NavLink>
             </Menu>
           </Box>
           <Box sx = {{flexGrow: 0}}>

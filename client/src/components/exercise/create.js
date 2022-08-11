@@ -3,8 +3,14 @@ import { Container, Box} from "@mui/material"
 import { useNavigate } from "react-router"
 import addWorkoutTitle from "../../imgs/addworkout-title.svg"
 import Navbar from "../navbar/Nav"
+import { useSearchParams } from "react-router-dom";
 
 export default function Create() {
+
+  let [searchParams] = useSearchParams();
+  let params = Object.fromEntries([...searchParams])
+
+
   const [form, setForm] = useState({
     workout: "",
     sets: "",
@@ -61,7 +67,7 @@ export default function Create() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar user={params.user}/>
           <img src={addWorkoutTitle} alt="Edit Workout" className="center" />
           <Container>
               <form onSubmit={onSubmit}>
@@ -73,6 +79,7 @@ export default function Create() {
                               onChange={(e) => updateForm({ workout: e.target.value })}
                               style={{width: "99.5%", height: "2.5em"}}
                               value={form.workout}
+                              required
                           >
                               <option value={"Select Workout"}>Select Workout</option>
                               <option value={"Bench Press"}>Bench Press</option>
@@ -97,6 +104,7 @@ export default function Create() {
                               type="number" 
                               onChange={e => updateForm({sets: e.target.value})}
                               value={form.sets}
+                              required
                           />
                       </label>
                   </Box>
@@ -109,6 +117,7 @@ export default function Create() {
                               type="number" 
                               onChange={e => updateForm({reps: e.target.value})}
                               value={form.reps}
+                              required
                           />
                       </label>
                   </Box>
@@ -121,6 +130,7 @@ export default function Create() {
                               type="number" 
                               onChange={e => updateForm({weight: e.target.value})}
                               value={form.weight}
+                              required
                           />
                       </label>
                   </Box>
@@ -137,6 +147,7 @@ export default function Create() {
                                   date: e.target.value
                               })}
                               value={form.date}
+                              required
                           />
                       </label>
                   </Box>

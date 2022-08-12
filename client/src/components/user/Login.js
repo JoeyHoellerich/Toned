@@ -1,20 +1,23 @@
-import React, {useState} from "react"
+import React, {useState, useContext, useEffect} from "react"
 import { Container, Box } from "@mui/material"
 import { useNavigate } from "react-router"
 
 import tonedTitle from "../../imgs/toned-title.svg"
 import tonedLogo from "../../imgs/toned-logo.svg"
+import UserContext from "../../context/UserContext"
 
 export default function Login(){
 
+    let {user, updateUser} = useContext(UserContext)
+
     const navigate = useNavigate()
 
-    const [user, setUser] = useState("")
+    const [userInput, setUserInput] = useState("")
     const [isUser, setIsUser] = useState(false)
 
     function changeUser(e){
-        setUser(e.target.value)
-        if(user === ""){
+        setUserInput(e.target.value)
+        if(userInput === ""){
             setIsUser(false)
         }
     }
@@ -23,7 +26,7 @@ export default function Login(){
         e.preventDefault()
     
         // Check to see if user is in database
-        let response = await fetch(`http://localhost:3000/user/${user}`, {
+        let response = await fetch(`http://localhost:3000/user/${userInput}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -35,8 +38,8 @@ export default function Login(){
     
         // if the user exists 
         if (userObject.length > 0){
-            let user = userObject[0].username
-            navigate(`/pastworkouts?user=${user}`)
+            updateUser(userObject)
+            navigate(`/pastworkouts`)
         } else {
             setIsUser(true)
         }
@@ -66,7 +69,7 @@ export default function Login(){
                                     className="tonedInput" 
                                     name="user" id="username-input" 
                                     type="text"
-                                    value={user}
+                                    value={userInput}
                                     onChange={changeUser} 
                                 />
                                 <button type="submit" className="loginBtn">Go!</button>

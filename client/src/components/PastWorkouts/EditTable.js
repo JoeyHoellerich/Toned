@@ -1,5 +1,6 @@
 import React from 'react'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button } from '@mui/material' 
+import { useNavigate } from "react-router"
 
 function createData(set, reps, weight) {
     return { set, reps, weight };
@@ -14,6 +15,8 @@ createData(5, 20, 500),
 ];
 
 export default function EditTable() {
+
+    const navigate = useNavigate();
 
     const tableHeadStyle = [
         {backgroundColor: "#F6C971"},
@@ -50,6 +53,10 @@ export default function EditTable() {
         {width: "15%"}
     ]
 
+    function toEdit(){
+        navigate("/editworkout/123")
+    }
+
     return(
         <TableContainer>
             <Table>
@@ -69,7 +76,7 @@ export default function EditTable() {
                                 <TableCell sx ={tableBodyCellStyle} align="left">{row.reps}</TableCell>
                                 <TableCell sx ={tableBodyCellStyle} align="left">{row.weight}</TableCell>
                                 <TableCell sx ={tableBodyButtonCellStyle} align="center">
-                                    <Button variant="contained" href="#">Edit</Button>
+                                    <Button variant="contained" onClick={toEdit}>Edit</Button>
                                 </TableCell>
                             </TableRow>
                         )

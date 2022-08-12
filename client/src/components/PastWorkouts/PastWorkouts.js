@@ -1,9 +1,10 @@
-import React, { useEffect } from "react"
+import React, { useContext } from "react"
 import WorkoutDayCard from "./WorkoutDayCard"
 import pastWorkoutTitle from "../../imgs/pastworkouts-title.svg"
 import { Container } from "@mui/material"
 import Navbar from "../navbar/Nav"
-import { useSearchParams } from "react-router-dom";
+
+import UserContext from "../../context/UserContext"
 
 // Mock Data
 const data = [[{
@@ -105,22 +106,12 @@ const data = [[{
 ]
 
 export default function PastWorkouts(){
-
-  // location.state gets you state from previous component
-  // const location = useLocation()
-  // const username = location.state[0].username
-
-  // gets query params from url
-  let [searchParams] = useSearchParams()
-  let params = Object.fromEntries([...searchParams])
-
-  useEffect(() => {
-    console.log(params)
-  })
+  
+  const {user, updateUser} = useContext(UserContext)
 
     return(
       <div>
-        <Navbar user={params.user}/>
+        <Navbar />
         <Container>
             <img className="center" alt="Past Workouts" src = {pastWorkoutTitle} />
             {data.map((exercises, index) => {

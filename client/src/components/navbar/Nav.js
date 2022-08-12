@@ -12,13 +12,7 @@ import Menu from "@mui/material/Menu";
 import logo from "../../imgs/toned-logo.svg"
 import logoTitle from "../../imgs/toned-title.svg"
 
-export default function Navbar(props) {
-
-  let username = props.user
-
-  React.useEffect(() => {
-    console.log(props)
-  })
+export default function Navbar() {
 
   const NavBarStyle = [
     {backgroundColor: "#535D65"},
@@ -70,8 +64,8 @@ export default function Navbar(props) {
                   onClose={handleClose}
                 >
                   <NavLink style={NavLinkStyle} to="/"><MenuItem onClick={handleClose}>Home</MenuItem></NavLink>
-                  <NavLink style={NavLinkStyle} to={{pathname: `/add?user=${username}`}}><MenuItem onClick={handleClose}>Add Workout</MenuItem></NavLink>
-                  <NavLink style={NavLinkStyle} to={{pathname: `/pastworkouts?user=${username}`}}><MenuItem onClick={handleClose}>Past Workouts</MenuItem></NavLink>
+                  <NavLink style={NavLinkStyle} to={{pathname: `/add`}}><MenuItem onClick={handleClose}>Add Workout</MenuItem></NavLink>
+                  <NavLink style={NavLinkStyle} to={{pathname: `/pastworkouts`}}><MenuItem onClick={handleClose}>Past Workouts</MenuItem></NavLink>
             </Menu>
           </Box>
           <Box sx = {{flexGrow: 0}}>

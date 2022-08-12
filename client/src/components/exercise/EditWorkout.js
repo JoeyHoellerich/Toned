@@ -70,6 +70,20 @@ export default function EditWorkout(props){
         navigate("/pastworkouts")
     }
 
+    async function onDelete(e) {
+        e.preventDefault()
+
+        // This will send a post request to update the data in the database.
+        await fetch(`http://localhost:3000/exercise/${id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+    
+        navigate("/pastworkouts")
+    }
+
     function updateForm(value) {
         return setForm((prev) => {
           return { ...prev, ...value }
@@ -169,6 +183,11 @@ export default function EditWorkout(props){
                         <Box sx={inputBoxStyle}>
                             <div className="center">
                                 <button type="submit" className="tonedButton">Update Workout</button>
+                            </div>
+                        </Box>
+                        <Box sx={inputBoxStyle}>
+                            <div className="center">
+                                <button onClick = {onDelete} className="tonedButton" style={{backgroundColor: "#ff5252"}}>Delete Workout</button>
                             </div>
                         </Box>
                     </form>

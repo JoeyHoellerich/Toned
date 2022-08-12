@@ -1,19 +1,8 @@
 import React from 'react'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material' 
 
-function createData(set, reps, weight) {
-    return { set, reps, weight };
-}
 
-const rows = [
-createData(1, 10, 100),
-createData(2, 10, 125),
-createData(3, 5, 50),
-createData(4, 10, 100),
-createData(5, 20, 500),
-];
-
-export default function DetailsTable() {
+export default function DetailsTable(props) {
 
     const tableHeadStyle = [
         {backgroundColor: "#9EFFC5"},
@@ -47,10 +36,10 @@ export default function DetailsTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row, index) => {
+                    {props.data.map((row, index) => {
                         return(
                             <TableRow sx = {tableBodyStyle} key={index}>
-                                <TableCell sx ={tableBodyCellStyle} align="left">{row.set}</TableCell>
+                                <TableCell sx ={tableBodyCellStyle} align="left">{row.sets}</TableCell>
                                 <TableCell sx ={tableBodyCellStyle} align="left">{row.reps}</TableCell>
                                 <TableCell sx ={tableBodyCellStyle} align="left">{row.weight}</TableCell>
                             </TableRow>

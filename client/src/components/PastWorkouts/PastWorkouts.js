@@ -3,109 +3,13 @@ import WorkoutDayCard from "./WorkoutDayCard"
 import pastWorkoutTitle from "../../imgs/pastworkouts-title.svg"
 import { Container } from "@mui/material"
 import Navbar from "../navbar/Nav"
+import { useNavigate } from "react-router"
 
 import UserContext from "../../context/UserContext"
 
-// Mock Data
-const mockdata = [[{
-    "_id": "62ec22c5b1bb9a6fd48408be",
-    "workout": "Deadlift",
-    "sets": 3,
-    "reps": 1,
-    "weight": 225,
-    "user": {
-      "$oid": "62ef6e2f0d2dd3c89c5855e0"
-    },
-    "date": {
-      "$date": {
-        "$numberLong": "1659983268936"
-      }
-    },
-    "__v": 0
-  },
-  {
-    "_id": "62ec22c5b1bb9a6fd48408bf",
-    "workout": "Squat",
-    "sets": 3,
-    "reps": 1,
-    "weight": 225,
-    "user": {
-      "$oid": "62ef6e2f0d2dd3c89c5855e0"
-    },
-    "date": {
-      "$date": {
-        "$numberLong": "1659983268937"
-      }
-    },
-    "__v": 0
-  },
-  {
-    "_id": "62ec22c5b1bb9a6fd48408bc",
-    "workout": "Tummy Tap",
-    "sets": 3,
-    "reps": 1,
-    "weight": 225,
-    "user": {
-      "$oid": "62ef6e2f0d2dd3c89c5855e0"
-    },
-    "date": {
-      "$date": {
-        "$numberLong": "1659983268938"
-      }
-    },
-    "__v": 0
-  }],
-  [{
-    "_id": "62ec22c5b1bb9a6fd48408be",
-    "workout": "Deadlift",
-    "sets": 3,
-    "reps": 1,
-    "weight": 225,
-    "user": {
-      "$oid": "62ef6e2f0d2dd3c89c5855e0"
-    },
-    "date": {
-      "$date": {
-        "$numberLong": "1659983268936"
-      }
-    },
-    "__v": 0
-  },
-  {
-    "_id": "62ec22c5b1bb9a6fd48408bf",
-    "workout": "Squat",
-    "sets": 3,
-    "reps": 1,
-    "weight": 225,
-    "user": {
-      "$oid": "62ef6e2f0d2dd3c89c5855e0"
-    },
-    "date": {
-      "$date": {
-        "$numberLong": "1659983268937"
-      }
-    },
-    "__v": 0
-  },
-  {
-    "_id": "62ec22c5b1bb9a6fd48408bc",
-    "workout": "Tummy Tap",
-    "sets": 3,
-    "reps": 1,
-    "weight": 225,
-    "user": {
-      "$oid": "62ef6e2f0d2dd3c89c5855e0"
-    },
-    "date": {
-      "$date": {
-        "$numberLong": "1659983268938"
-      }
-    },
-    "__v": 0
-  }]
-]
-
 export default function PastWorkouts(){
+
+  const navigate = useNavigate()
 
   const [data, setData] = useState({
     benchPress: [],
@@ -281,16 +185,16 @@ export default function PastWorkouts(){
     console.log(data)
   }, [])
 
+  function toEdit(url){
+    navigate(url)
+  }
+
     return(
       <div>
         <Navbar />
         <Container>
             <img className="center" alt="Past Workouts" src = {pastWorkoutTitle} />
-            {mockdata.map((exercises, index) => {
-                return (
-                    <WorkoutDayCard key={index} data={exercises} />
-                )
-            })}
+            <WorkoutDayCard data = {data} toEdit={toEdit} />
         </Container>
         <button onClick={e => console.log}>Click</button>
       </div>

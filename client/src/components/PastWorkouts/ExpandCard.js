@@ -99,14 +99,14 @@ export default function ExpandCard(props) {
             <Collapse in={detailOpen} unmountOnExit>
                 <Container>
                     {/* Replace with Table */}
-                    <DetailsTable />
+                    <DetailsTable data = {props.data} />
                 </Container>
             </Collapse>
             {/* Collapse for Edit - Opens when edit button is clicked */}
             <Collapse in={editOpen} unmountOnExit>
                 <Container>
                     {/* Replace with Editable Table */}
-                    <EditTable />
+                    <EditTable data = {props.data}  />
                 </Container>
             </Collapse>
         </div>

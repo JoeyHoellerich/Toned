@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext, createContext } from "react"
 import { Link } from "react-router-dom"
+import UserContext from "../../context/UserContext"
+import { useNavigate } from "react-router"
+import Navbar from "../navbar/Nav"
 
 const Exercise = (props) => (
   <tr>
@@ -17,14 +20,23 @@ const Exercise = (props) => (
   </tr>
 )
 
-export default function ExerciseLog() {
+export default function ExercisePage() {
+  let { user } = useContext(UserContext)
+  console.log({ user } + "user")
+  const userId = user[0]._id
+  const username = user[0].username
+
+  console.log(username + "28")
+  console.log(userId)
+  // let { user, updateUser } = useContext(UserContext)
+
   const [exercises, setExercises] = useState([])
   console.log({ exercises })
 
   // This method fetches the records from the database
   useEffect(() => {
     async function getExercises() {
-      const response = await fetch(`http://localhost:3000/exercise`)
+      const response = await fetch(`http://localhost:3000/exercise/${username}`)
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`
@@ -32,8 +44,8 @@ export default function ExerciseLog() {
         return
       }
 
-      const exercises = await response.json()
-      setExercises(exercises)
+      var resData = await response.json()
+      setExercises((prev) => ({ ...prev, ...resData.workouts }))
     }
     getExercises()
 
@@ -52,7 +64,7 @@ export default function ExerciseLog() {
 
   // This method will map out the records on the table
   function exerciseList() {
-    return exercises.map((exercise) => {
+    return Object.values(exercises).map((exercise) => {
       return (
         <Exercise
           exercise={exercise}
@@ -84,6 +96,7 @@ export default function ExerciseLog() {
   // This following section will display the table with the records of individuals.
   return (
     <div>
+      <Navbar />
       {exerciseList().length === 0 ? welcomePage() : <h3>Exercise List</h3>}
       <table style={{ marginTop: 20 }}>
         <thead>

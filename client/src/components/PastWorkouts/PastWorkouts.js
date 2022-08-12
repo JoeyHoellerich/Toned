@@ -3,13 +3,10 @@ import WorkoutDayCard from "./WorkoutDayCard"
 import pastWorkoutTitle from "../../imgs/pastworkouts-title.svg"
 import { Container } from "@mui/material"
 import Navbar from "../navbar/Nav"
-import { useNavigate } from "react-router"
 
 import UserContext from "../../context/UserContext"
 
 export default function PastWorkouts(){
-
-  const navigate = useNavigate()
 
   const [data, setData] = useState({
     benchPress: [],
@@ -32,7 +29,6 @@ export default function PastWorkouts(){
   
   const {user} = useContext(UserContext)
 
-  const userId = user[0]._id
   const username = user[0].username
 
   // when the page renders, go grab all the workout data for the various exercises
@@ -185,18 +181,13 @@ export default function PastWorkouts(){
     console.log(data)
   }, [])
 
-  function toEdit(url){
-    navigate(url)
-  }
-
     return(
       <div>
         <Navbar />
         <Container>
             <img className="center" alt="Past Workouts" src = {pastWorkoutTitle} />
-            <WorkoutDayCard data = {data} toEdit={toEdit} />
+            <WorkoutDayCard data = {data} />
         </Container>
-        <button onClick={e => console.log}>Click</button>
       </div>
     )
 }

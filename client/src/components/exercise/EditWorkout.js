@@ -1,5 +1,5 @@
 import { Container, Box} from "@mui/material"
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import editWorkoutTitle from "../../imgs/editworkout-title.svg"
 import { useParams, useNavigate } from "react-router"
 
@@ -7,27 +7,9 @@ import Navbar from "../navbar/Nav"
 
 export default function EditWorkout(props){
 
-    const params = useParams()
+    const { id } = useParams()
     const navigate = useNavigate()
-
-    const workoutData = {
-        "_id": "62ec22c5b1bb9a6fd48408be",
-        "workout": "Deadlift",
-        "sets": 3,
-        "reps": 1,
-        "weight": 225,
-        "user": {
-          "$oid": "62ef6e2f0d2dd3c89c5855e0"
-        },
-        "date": "2022-08-09T18:06:21.647+00:00",
-        "__v": 0
-    }
-
-    const inputBoxStyle = [
-        {margin: "auto"},
-        {paddingBottom: "15px"}
-    ]
-
+    
     const [form, setForm] = useState({
         workout: "",
         sets: "",
@@ -35,6 +17,35 @@ export default function EditWorkout(props){
         weight: "",
         date: ""
     })
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch(`http://localhost:3000/exercise/id/${id}`, {
+                method: "GET",
+                headers: {
+                "Content-Type": "application/json",
+                },
+            })
+
+            let responseJSON = await response.json();
+            let exercise = responseJSON.exercise[0]
+            updateForm({
+                workout: exercise.workout,
+                sets: exercise.sets,
+                reps: exercise.reps,
+                weight: exercise.weight,
+                date: utcToLocale(exercise.date)
+            })
+        }
+
+        fetchData()
+    }, [])
+
+    const inputBoxStyle = [
+        {margin: "auto"},
+        {paddingBottom: "15px"}
+    ]
+
 
     async function onSubmit(e) {
         e.preventDefault()
@@ -48,7 +59,7 @@ export default function EditWorkout(props){
         }
     
         // This will send a post request to update the data in the database.
-        await fetch(`http://localhost:3000/update/${params.id}`, {
+        await fetch(`http://localhost:3000/exercise/${id}`, {
           method: "PUT",
           body: JSON.stringify(editedExercise),
           headers: {
@@ -56,7 +67,7 @@ export default function EditWorkout(props){
           },
         })
     
-        navigate("/")
+        navigate("/pastworkouts")
     }
 
     function updateForm(value) {
@@ -65,15 +76,9 @@ export default function EditWorkout(props){
         })
     }
 
-    // converts NumberLong to mm-dd-yyyy date to display to user
-    // function getDateIfDate(d) {
-    //     var m = d.match(/\/Date\((\d+)\)\//);
-    //     return m ? (new Date(+m[1])).toLocaleDateString('en-US', {month: '2-digit', day: '2-digit', year: 'numeric'}) : d;
-    // }
-
     function utcToLocale(d) {
         let date = new Date(d)
-        var dd = date.getDate(); 
+        var dd = date.getDate()+1; 
         var mm = date.getMonth()+1;
         var yyyy = date.getFullYear(); 
         if(dd<10){dd='0'+dd} 
@@ -95,9 +100,8 @@ export default function EditWorkout(props){
                                     id="workout-select"
                                     onChange={(e) => updateForm({ workout: e.target.value })}
                                     style={{width: "99.5%", height: "2.5em"}}
-                                    defaultValue= {workoutData.workout}
+                                    value= {form.workout}
                                 >
-                                    <option value={"Select Workout"}>Select Workout</option>
                                     <option value={"Bench Press"}>Bench Press</option>
                                     <option value={"Incline Bench Press"}>Incline Bench Press</option>
                                     <option value={"Decline Bench Press"}>Decline Bench Press</option>
@@ -118,7 +122,7 @@ export default function EditWorkout(props){
                                     className="tonedInput" 
                                     name="sets" id="sets-input" 
                                     type="number" 
-                                    defaultValue={workoutData.sets}
+                                    value={form.sets}
                                     onChange={e => updateForm({sets: e.target.value})}
                                 />
                             </label>
@@ -130,7 +134,7 @@ export default function EditWorkout(props){
                                     className="tonedInput" 
                                     name="reps" id="reps-input" 
                                     type="number" 
-                                    defaultValue={workoutData.reps}
+                                    value={form.reps}
                                     onChange={e => updateForm({reps: e.target.value})}
                                 />
                             </label>
@@ -142,7 +146,7 @@ export default function EditWorkout(props){
                                     className="tonedInput" 
                                     name="weight" id="weight-input" 
                                     type="number" 
-                                    defaultValue={workoutData.weight}
+                                    value={form.weight}
                                     onChange={e => updateForm({weight: e.target.value})}
                                 />
                             </label>
@@ -154,11 +158,8 @@ export default function EditWorkout(props){
                                     className="tonedInput" 
                                     name="reps" id="sets-input" 
                                     type="date" 
-                                    defaultValue={
-                                        utcToLocale(workoutData.date)
-                                    }
-
                                     style = {{"height" : "2.5em"}}
+                                    value = {form.date}
                                     onChange={e => updateForm({
                                         date: e.target.value
                                     })}
@@ -167,7 +168,7 @@ export default function EditWorkout(props){
                         </Box>
                         <Box sx={inputBoxStyle}>
                             <div className="center">
-                                <button type="submit" className="tonedButton">Add Workout</button>
+                                <button type="submit" className="tonedButton">Update Workout</button>
                             </div>
                         </Box>
                     </form>

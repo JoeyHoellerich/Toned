@@ -11,7 +11,7 @@ export default function Create() {
     const userId = user[0]._id
 
     const [form, setForm] = useState({
-        workout: "",
+        workout: "Bench Press",
         sets: "",
         reps: "",
         weight: "",

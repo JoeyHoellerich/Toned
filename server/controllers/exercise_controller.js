@@ -32,6 +32,19 @@ exercise.get("/:user", async (req, res) => {
       })
   })
 })
+
+// route to get exercise information based on exercise id
+exercise.get("/id/:id", async (req, res) => {
+    const exercise = Exercise.find({
+      _id: req.params.id,
+    })
+      .populate({
+        path: "user",
+      })
+      .then((foundWorkouts) => {
+        res.status(200).json({exercise: foundWorkouts})
+      })
+  })
 // get user's exercises from a specific date @"/exercise/(username)/dates"
 // Query ?startday=(date in YYYYMMDD format), required query term
 // Query ?back=(how many days in the past), default is 30 days

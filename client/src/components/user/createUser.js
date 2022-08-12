@@ -1,11 +1,15 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { Box, IconButton } from "@mui/material"
 import { useNavigate } from "react-router"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import createUserTitle from "../../imgs/signup-title.svg"
+import UserContext from "../../context/UserContext";
+
 
 
 export default function CreateUser() {
+
+  const {user, updateUser} = useContext(UserContext)
 
   const inputBoxStyle = [
     {margin: "auto"},
@@ -26,6 +30,9 @@ export default function CreateUser() {
     age: "",
     weight: "",
   })
+
+  const [invalidUser, setInvalidUser] = useState(false)
+
   const navigate = useNavigate()
 
   function updateForm(value) {
@@ -38,30 +45,54 @@ export default function CreateUser() {
     navigate("/")
   }
 
+  function changeUser(e){
+    updateForm({ username: e.target.value })
+    if(form.username === ""){
+        setInvalidUser(false)
+    }
+}
+
   async function onSubmit(e) {
     e.preventDefault()
 
     const newUser = { ...form }
 
-    await fetch("http://localhost:3000/user", {
-      method: "POST",
+    let response = await fetch(`http://localhost:3000/user/${form.username}`, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newUser),
-    }).catch((error) => {
-      window.alert(error)
-      return
     })
 
-    setForm({
-      username: "",
-      firstName: "",
-      lastName: "",
-      age: "",
-      weight: "",
-    })
-    navigate("/")
+    let userObject = await response.json()
+
+    if(userObject.length > 0){
+      setInvalidUser(true)
+    } else {
+
+
+      let newUserResponse = await fetch("http://localhost:3000/user", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        }).catch((error) => {
+          window.alert(error)
+          return
+        })
+
+      updateUser(newUserResponse)
+    
+        setForm({
+          username: "",
+          firstName: "",
+          lastName: "",
+          age: "",
+          weight: "",
+        })
+        navigate("/pastworkouts")
+    }
   }
 
   return (
@@ -79,7 +110,9 @@ export default function CreateUser() {
                       name="user" id="username-input" 
                       type="text"
                       value={form.username}
-                      onChange={(e) => updateForm({ username: e.target.value })}
+                      onChange={changeUser}
+                      pattern="[^' ']+"
+                      required
                   />
             </label>
         </Box>
@@ -92,6 +125,7 @@ export default function CreateUser() {
                       type="text"
                       value={form.firstName}
                       onChange={(e) => updateForm({ firstName: e.target.value })}
+                      required
                   />
             </label>
         </Box>
@@ -104,6 +138,7 @@ export default function CreateUser() {
                       type="text"
                       value={form.lastName}
                       onChange={(e) => updateForm({ lastName: e.target.value })}
+                      required
                   />
             </label>
         </Box>
@@ -116,6 +151,7 @@ export default function CreateUser() {
                       type="number"
                       value={form.age}
                       onChange={(e) => updateForm({ age: e.target.value })}
+                      required
                   />
             </label>
         </Box>
@@ -128,9 +164,11 @@ export default function CreateUser() {
                       type="number"
                       value={form.weight}
                       onChange={(e) => updateForm({ weight: e.target.value })}
+                      required
                   />
             </label>
         </Box>
+        {invalidUser ? <h2 className="errorMsg">That Username has already been taken, try another one</h2> : <></>}
         <Box>
             <div className="center">
                 <h2 className="tonedLabel">Let's Get Going!</h2>

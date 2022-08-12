@@ -3,6 +3,8 @@ import React, {useState} from "react"
 import editWorkoutTitle from "../../imgs/editworkout-title.svg"
 import { useParams, useNavigate } from "react-router"
 
+import Navbar from "../navbar/Nav"
+
 export default function EditWorkout(props){
 
     const params = useParams()
@@ -80,95 +82,98 @@ export default function EditWorkout(props){
     }
 
     return(
-        <Container>
-            <img src={editWorkoutTitle} alt="Edit Workout" className="center" />
+        <div>
+            <Navbar />
             <Container>
-                <form onSubmit={onSubmit}>
-                    <Box sx={inputBoxStyle}>
-                        <label className="center">
-                            <h2 className="tonedInputLabel">Workout</h2>
-                            <select className="tonedInput"
-                                id="workout-select"
-                                onChange={(e) => updateForm({ workout: e.target.value })}
-                                style={{width: "99.5%", height: "2.5em"}}
-                                defaultValue= {workoutData.workout}
-                            >
-                                <option value={"Select Workout"}>Select Workout</option>
-                                <option value={"Bench Press"}>Bench Press</option>
-                                <option value={"Incline Bench Press"}>Incline Bench Press</option>
-                                <option value={"Decline Bench Press"}>Decline Bench Press</option>
-                                <option value={"Squat"}>Squat</option>
-                                <option value={"Leg Press"}>Leg Press</option>
-                                <option value={"Romanian Deadlift"}>Romanian Deadlift</option>
-                                <option value={"Deadlift"}>Deadlift</option>
-                                <option value={"Lat Pulldown"}>Lat Pulldown</option>
-                                <option value={"Pull-Ups"}>Pull-Ups</option>
-                                <option value={"Push-Ups"}>Push-Ups</option>
-                            </select>
-                        </label>
-                    </Box>
-                    <Box sx={inputBoxStyle}>
-                        <label className="center">
-                            <h2 className="tonedInputLabel">Sets</h2>
-                            <input 
-                                className="tonedInput" 
-                                name="sets" id="sets-input" 
-                                type="number" 
-                                defaultValue={workoutData.sets}
-                                onChange={e => updateForm({sets: e.target.value})}
-                            />
-                        </label>
-                    </Box>
-                    <Box sx={inputBoxStyle}>
-                        <label className="center">
-                            <h2 className="tonedInputLabel">Reps</h2>
-                            <input 
-                                className="tonedInput" 
-                                name="reps" id="reps-input" 
-                                type="number" 
-                                defaultValue={workoutData.reps}
-                                onChange={e => updateForm({reps: e.target.value})}
-                            />
-                        </label>
-                    </Box>
-                    <Box sx={inputBoxStyle}>
-                        <label className="center">
-                            <h2 className="tonedInputLabel">Weight</h2>
-                            <input 
-                                className="tonedInput" 
-                                name="weight" id="weight-input" 
-                                type="number" 
-                                defaultValue={workoutData.weight}
-                                onChange={e => updateForm({weight: e.target.value})}
-                            />
-                        </label>
-                    </Box>
-                    <Box sx={inputBoxStyle}>
-                        <label className="center">
-                            <h2 className="tonedInputLabel">Date</h2>
-                            <input 
-                                className="tonedInput" 
-                                name="reps" id="sets-input" 
-                                type="date" 
-                                defaultValue={
-                                    utcToLocale(workoutData.date)
-                                }
+                <img src={editWorkoutTitle} alt="Edit Workout" className="center" />
+                <Container>
+                    <form onSubmit={onSubmit}>
+                        <Box sx={inputBoxStyle}>
+                            <label className="center">
+                                <h2 className="tonedInputLabel">Workout</h2>
+                                <select className="tonedInput"
+                                    id="workout-select"
+                                    onChange={(e) => updateForm({ workout: e.target.value })}
+                                    style={{width: "99.5%", height: "2.5em"}}
+                                    defaultValue= {workoutData.workout}
+                                >
+                                    <option value={"Select Workout"}>Select Workout</option>
+                                    <option value={"Bench Press"}>Bench Press</option>
+                                    <option value={"Incline Bench Press"}>Incline Bench Press</option>
+                                    <option value={"Decline Bench Press"}>Decline Bench Press</option>
+                                    <option value={"Squat"}>Squat</option>
+                                    <option value={"Leg Press"}>Leg Press</option>
+                                    <option value={"Romanian Deadlift"}>Romanian Deadlift</option>
+                                    <option value={"Deadlift"}>Deadlift</option>
+                                    <option value={"Lat Pulldown"}>Lat Pulldown</option>
+                                    <option value={"Pull-Ups"}>Pull-Ups</option>
+                                    <option value={"Push-Ups"}>Push-Ups</option>
+                                </select>
+                            </label>
+                        </Box>
+                        <Box sx={inputBoxStyle}>
+                            <label className="center">
+                                <h2 className="tonedInputLabel">Sets</h2>
+                                <input 
+                                    className="tonedInput" 
+                                    name="sets" id="sets-input" 
+                                    type="number" 
+                                    defaultValue={workoutData.sets}
+                                    onChange={e => updateForm({sets: e.target.value})}
+                                />
+                            </label>
+                        </Box>
+                        <Box sx={inputBoxStyle}>
+                            <label className="center">
+                                <h2 className="tonedInputLabel">Reps</h2>
+                                <input 
+                                    className="tonedInput" 
+                                    name="reps" id="reps-input" 
+                                    type="number" 
+                                    defaultValue={workoutData.reps}
+                                    onChange={e => updateForm({reps: e.target.value})}
+                                />
+                            </label>
+                        </Box>
+                        <Box sx={inputBoxStyle}>
+                            <label className="center">
+                                <h2 className="tonedInputLabel">Weight</h2>
+                                <input 
+                                    className="tonedInput" 
+                                    name="weight" id="weight-input" 
+                                    type="number" 
+                                    defaultValue={workoutData.weight}
+                                    onChange={e => updateForm({weight: e.target.value})}
+                                />
+                            </label>
+                        </Box>
+                        <Box sx={inputBoxStyle}>
+                            <label className="center">
+                                <h2 className="tonedInputLabel">Date</h2>
+                                <input 
+                                    className="tonedInput" 
+                                    name="reps" id="sets-input" 
+                                    type="date" 
+                                    defaultValue={
+                                        utcToLocale(workoutData.date)
+                                    }
 
-                                style = {{"height" : "2.5em"}}
-                                onChange={e => updateForm({
-                                    date: e.target.value
-                                })}
-                            />
-                        </label>
-                    </Box>
-                    <Box sx={inputBoxStyle}>
-                        <div className="center">
-                            <button type="submit" className="tonedButton">Add Workout</button>
-                        </div>
-                    </Box>
-                </form>
+                                    style = {{"height" : "2.5em"}}
+                                    onChange={e => updateForm({
+                                        date: e.target.value
+                                    })}
+                                />
+                            </label>
+                        </Box>
+                        <Box sx={inputBoxStyle}>
+                            <div className="center">
+                                <button type="submit" className="tonedButton">Add Workout</button>
+                            </div>
+                        </Box>
+                    </form>
+                </Container>
             </Container>
-        </Container>
+        </div>
     )
 
 }

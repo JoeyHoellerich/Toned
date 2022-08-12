@@ -1,21 +1,23 @@
-import React, {useState} from "react"
+import React, {useState, useContext, useEffect} from "react"
 import { Container, Box } from "@mui/material"
-import { useParams, useNavigate } from "react-router"
+import { useNavigate } from "react-router"
 
 import tonedTitle from "../../imgs/toned-title.svg"
 import tonedLogo from "../../imgs/toned-logo.svg"
+import UserContext from "../../context/UserContext"
 
 export default function Login(){
 
-    const params = useParams()
+    let {user, updateUser} = useContext(UserContext)
+
     const navigate = useNavigate()
 
-    const [user, setUser] = useState("")
+    const [userInput, setUserInput] = useState("")
     const [isUser, setIsUser] = useState(false)
 
     function changeUser(e){
-        setUser(e.target.value)
-        if(user == ""){
+        setUserInput(e.target.value)
+        if(userInput === ""){
             setIsUser(false)
         }
     }
@@ -24,16 +26,20 @@ export default function Login(){
         e.preventDefault()
     
         // Check to see if user is in database
-        let userObject = await fetch(`http://localhost:5000/user/${user}`, {
+        let response = await fetch(`http://localhost:3000/user/${userInput}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
         })
+
+        // returns response as an array of objects, for user it is just 1 object
+        let userObject = await response.json()
     
         // if the user exists 
-        if (userObject.headers.get("content-length") > 2){
-            console.log(userObject)
+        if (userObject.length > 0){
+            updateUser(userObject)
+            navigate(`/pastworkouts`)
         } else {
             setIsUser(true)
         }
@@ -63,7 +69,7 @@ export default function Login(){
                                     className="tonedInput" 
                                     name="user" id="username-input" 
                                     type="text"
-                                    value={user}
+                                    value={userInput}
                                     onChange={changeUser} 
                                 />
                                 <button type="submit" className="loginBtn">Go!</button>

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { NavLink } from "react-router-dom"
+import { NavLink} from "react-router-dom"
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -64,8 +64,8 @@ export default function Navbar() {
                   onClose={handleClose}
                 >
                   <NavLink style={NavLinkStyle} to="/"><MenuItem onClick={handleClose}>Home</MenuItem></NavLink>
-                  <NavLink style={NavLinkStyle} to="/add"><MenuItem onClick={handleClose}>Add Workout</MenuItem></NavLink>
-                  <NavLink style={NavLinkStyle} to="/pastworkouts"><MenuItem onClick={handleClose}>Past Workouts</MenuItem></NavLink>
+                  <NavLink style={NavLinkStyle} to={{pathname: `/add`}}><MenuItem onClick={handleClose}>Add Workout</MenuItem></NavLink>
+                  <NavLink style={NavLinkStyle} to={{pathname: `/pastworkouts`}}><MenuItem onClick={handleClose}>Past Workouts</MenuItem></NavLink>
             </Menu>
           </Box>
           <Box sx = {{flexGrow: 0}}>

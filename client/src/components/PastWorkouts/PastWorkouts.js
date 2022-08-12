@@ -1,8 +1,10 @@
-import React from "react"
+import React, { useContext, useState, useEffect } from "react"
 import WorkoutDayCard from "./WorkoutDayCard"
 import pastWorkoutTitle from "../../imgs/pastworkouts-title.svg"
 import { Container } from "@mui/material"
 import Navbar from "../navbar/Nav"
+
+import UserContext from "../../context/UserContext"
 
 // Mock Data
 const data = [[{
@@ -104,6 +106,28 @@ const data = [[{
 ]
 
 export default function PastWorkouts(){
+
+  const [data, setData] = useState([])
+  
+  const {user} = useContext(UserContext)
+
+  const userId = user[0]._id
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`http://localhost:3000/user`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+    }
+
+    fetchData()
+    .catch(console.error)
+    
+  }, [data])
+
     return(
       <div>
         <Navbar />

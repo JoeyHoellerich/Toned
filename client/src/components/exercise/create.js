@@ -1,73 +1,81 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { Container, Box} from "@mui/material"
 import { useNavigate } from "react-router"
 import addWorkoutTitle from "../../imgs/addworkout-title.svg"
 import Navbar from "../navbar/Nav"
-import { useSearchParams } from "react-router-dom";
+import UserContext from "../../context/UserContext"
 
 export default function Create() {
 
-  let [searchParams] = useSearchParams();
-  let params = Object.fromEntries([...searchParams])
+    let {user} = useContext(UserContext)
+    const userId = user[0]._id
 
-
-  const [form, setForm] = useState({
-    workout: "",
-    sets: "",
-    reps: "",
-    weight: "",
-  })
-
-  const navigate = useNavigate()
-
-  const inputBoxStyle = [
-    {margin: "auto"},
-    {paddingBottom: "15px"}
-  ] 
-
-  // These methods will update the state properties
-  function updateForm(value) {
-    return setForm((prev) => {
-      return { ...prev, ...value }
-    })
-  }
-
-  // This function will handle the submission
-  async function onSubmit(e) {
-    e.preventDefault()
-
-    // When a post request is sent to the create url, we'll add a new record to the database.
-    const newExercise = { ...form }
-
-    await fetch("http://localhost:3000/exercise", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newExercise),
-    }).catch((error) => {
-      window.alert(error)
-      return
+    const [form, setForm] = useState({
+        workout: "",
+        sets: "",
+        reps: "",
+        weight: "",
+        date: utcToLocale(),
+        user: userId
     })
 
-    setForm({ workout: "", sets: "", reps: "", weight: "" })
-    navigate("/")
-  }
+    const navigate = useNavigate()
 
-  function utcToLocale() {
-    let date = new Date()
-    var dd = date.getDate(); 
-    var mm = date.getMonth()+1;
-    var yyyy = date.getFullYear(); 
-    if(dd<10){dd='0'+dd} 
-    if(mm<10){mm='0'+mm};
-    return (`${yyyy}-${mm}-${dd}`)
-}
+    const inputBoxStyle = [
+        {margin: "auto"},
+        {paddingBottom: "15px"}
+    ] 
+
+    // These methods will update the state properties
+    function updateForm(value) {
+        return setForm((prev) => {
+        return { ...prev, ...value }
+        })
+    }
+
+    // This function will handle the submission
+    async function onSubmit(e) {
+        e.preventDefault()
+
+        // When a post request is sent to the create url, we'll add a new record to the database.
+        const newExercise = { ...form }
+
+        await fetch("http://localhost:3000/exercise", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newExercise),
+        }).catch((error) => {
+        window.alert(error)
+        return
+        })
+
+        setForm({
+            workout: "",
+            sets: "",
+            reps: "",
+            weight: "",
+            date: utcToLocale(),
+            user: userId
+        })
+        navigate("/pastworkouts")
+    }
+
+    function utcToLocale() {
+        let date = new Date()
+        var dd = date.getDate(); 
+        var mm = date.getMonth()+1;
+        var yyyy = date.getFullYear(); 
+        if(dd<10){dd='0'+dd} 
+        if(mm<10){mm='0'+mm};
+        return (`${yyyy}-${mm}-${dd}`)
+    }
   // This following section will display the form that takes the input from the user
 
   return (
     <div>
-      <Navbar user={params.user}/>
+      <Navbar />
           <img src={addWorkoutTitle} alt="Edit Workout" className="center" />
           <Container>
               <form onSubmit={onSubmit}>
@@ -81,7 +89,6 @@ export default function Create() {
                               value={form.workout}
                               required
                           >
-                              <option value={"Select Workout"}>Select Workout</option>
                               <option value={"Bench Press"}>Bench Press</option>
                               <option value={"Incline Bench Press"}>Incline Bench Press</option>
                               <option value={"Decline Bench Press"}>Decline Bench Press</option>
@@ -142,7 +149,6 @@ export default function Create() {
                               name="reps" id="sets-input" 
                               type="date" 
                               style = {{"height" : "2.5em"}}
-                              defaultValue = {utcToLocale()}
                               onChange={e => updateForm({
                                   date: e.target.value
                               })}

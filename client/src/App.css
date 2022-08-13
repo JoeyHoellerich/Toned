@@ -39,7 +39,7 @@ body {
 /* Styling for Inputs */
 
 .tonedInputLabel {
-  color: #9EFFC5;
+  color: #9effc5;
   font-weight: 600;
   font-size: large;
   margin-top: 0.25em;
@@ -48,10 +48,10 @@ body {
 }
 
 .tonedInput {
-  background-color: #E4E4E4;
+  background-color: #e4e4e4;
   border: 2px solid black;
   border-radius: 10px;
-  width: 95%;
+  width: 100%;
   height: 2em;
   font-size: large;
   padding-left: 2%;
@@ -59,7 +59,7 @@ body {
 }
 
 .tonedLabel {
-  color: #E4E4E4;
+  color: #e4e4e4;
   text-align: center;
   font-style: italic;
   font-size: x-large;
@@ -69,12 +69,12 @@ body {
 
 .errorMsg {
   text-align: center;
-  color: #F6C971;
+  color: #f6c971;
   font-size: large;
 }
 
 .loginBtn {
-  background-color: #9EFFC5;
+  background-color: #9effc5;
   border: 2px solid black;
   border-radius: 10px;
   font-size: 1.25em;
@@ -89,11 +89,10 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-
 }
 
 .tonedButton {
-  background-color: #9EFFC5;
+  background-color: #9effc5;
   border: 2px solid black;
   border-radius: 10px;
   width: 100%;
@@ -105,6 +104,71 @@ input::-webkit-inner-spin-button {
   margin-top: 10px;
 }
 
+@media only screen and (max-width: 600px) {
+  .tonedButton {
+    height: auto;
+  }
+}
+
 .navbarImg {
   width: 50px;
+}
+
+table {
+  color: rgb(228, 228, 228);
+  border-collapse: collapse;
+  width: 100%;
+  background: #535d65;
+}
+
+thead,
+th,
+td {
+  border: 2px solid #e4e4e4;
+  font-weight: 700;
+  padding: 5px;
+}
+
+.editPencil {
+  display: inline;
+  background: #f6c971;
+  color: black;
+  border-radius: 5px;
+}
+
+.deleteBtn {
+  display: inline;
+  background-color: rgb(255, 82, 82);
+  border-radius: 5px;
+  font-weight: 900;
+  margin-left: 5px;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: space-evenly;
+  flex-grow: 1;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  opacity: 50%;
+}
+
+.recent {
+  display: flex;
+  justify-content: center;
+  color: rgb(228, 228, 228);
+  font-size: 1.4em;
+  font-weight: 900;
+}
+
+.welcome {
+  color: rgb(228, 228, 228);
+  font-weight: 400;
+  font-size: 1.5em;
 }

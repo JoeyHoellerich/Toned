@@ -18,12 +18,6 @@ const Exercise = (props) => (
         <Link to={`/edit/${props.exercise._id}`}>
           <EditOffOutlinedIcon className="editPencil" />
         </Link>
-        <button
-          className="deleteBtn"
-          onClick={async () => props.deleteExercise(props.exercise._id)}
-        >
-          X
-        </button>
       </div>
     </td>
   </tr>
@@ -54,14 +48,6 @@ export default function WorkoutPage() {
     return
   }, [exercises.length, username])
 
-  // This method will delete a record
-  async function deleteExercise(id) {
-    await fetch(`https://toned-mern.herokuapp.com/exercise/${id}`, {
-      method: "DELETE",
-    })
-
-    navigate("/workouts")
-  }
 
   // This method will map out the records on the table
   function exerciseList() {
@@ -69,7 +55,6 @@ export default function WorkoutPage() {
       return (
         <Exercise
           exercise={exercise}
-          deleteExercise={() => deleteExercise(exercise._id)}
           key={exercise._id}
         />
       )

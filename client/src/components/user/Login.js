@@ -10,7 +10,7 @@ export default function Login() {
   let { user, updateUser } = useContext(UserContext)
 
   const navigate = useNavigate()
-
+  console.log(user)
   const [userInput, setUserInput] = useState({ username: "" })
   const [isUser, setIsUser] = useState(false)
 
@@ -91,6 +91,7 @@ export default function Login() {
               <button
                 onClick={toCreateAccount}
                 className="tonedButton"
+                type="button"
                 style={{ marginBottom: "5%" }}
               >
                 Create an Account

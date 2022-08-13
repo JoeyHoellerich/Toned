@@ -48,7 +48,7 @@ export default function PastWorkouts() {
     // Get Squat Data from past 30 days
     const fetchSquat = async () => {
       const response = await fetch(
-        `http://localhost:3000/exercise/${username}/specific/Squat`,
+        `https://toned-mern.herokuapp.com/exercise/${username}/specific/Squat`,
         {
           method: "GET",
           headers: {
@@ -64,7 +64,7 @@ export default function PastWorkouts() {
     // Get Bench Press Data from past 30 days
     const fetchBenchPress = async () => {
       const response = await fetch(
-        `http://localhost:3000/exercise/${username}/specific/Bench Press`,
+        `https://toned-mern.herokuapp.com/exercise/${username}/specific/Bench Press`,
         {
           method: "GET",
           headers: {
@@ -80,7 +80,7 @@ export default function PastWorkouts() {
     // Get Incline Bench Press Data from past 30 days
     const fetchInclineBenchPress = async () => {
       const response = await fetch(
-        `http://localhost:3000/exercise/${username}/specific/Incline Bench Press`,
+        `https://toned-mern.herokuapp.com/exercise/${username}/specific/Incline Bench Press`,
         {
           method: "GET",
           headers: {
@@ -96,7 +96,7 @@ export default function PastWorkouts() {
     // Get Decline Bench Press Data from past 30 days
     const fetchDeclineBenchPress = async () => {
       const response = await fetch(
-        `http://localhost:3000/exercise/${username}/specific/Decline Bench Press`,
+        `https://toned-mern.herokuapp.com/exercise/${username}/specific/Decline Bench Press`,
         {
           method: "GET",
           headers: {
@@ -112,7 +112,7 @@ export default function PastWorkouts() {
     // Get Leg Press Data from past 30 days
     const fetchLegPress = async () => {
       const response = await fetch(
-        `http://localhost:3000/exercise/${username}/specific/Leg Press`,
+        `https://toned-mern.herokuapp.com/exercise/${username}/specific/Leg Press`,
         {
           method: "GET",
           headers: {
@@ -128,7 +128,7 @@ export default function PastWorkouts() {
     // Get Romanian Deadlift Data from past 30 days
     const fetchRomanianDeadlift = async () => {
       const response = await fetch(
-        `http://localhost:3000/exercise/${username}/specific/Romanian Deadlift`,
+        `https://toned-mern.herokuapp.com/exercise/${username}/specific/Romanian Deadlift`,
         {
           method: "GET",
           headers: {
@@ -144,7 +144,7 @@ export default function PastWorkouts() {
     // Get Deadlift Data from past 30 days
     const fetchDeadlift = async () => {
       const response = await fetch(
-        `http://localhost:3000/exercise/${username}/specific/Deadlift`,
+        `https://toned-mern.herokuapp.com/exercise/${username}/specific/Deadlift`,
         {
           method: "GET",
           headers: {
@@ -160,7 +160,7 @@ export default function PastWorkouts() {
     // Get Lat Pulldown Data from past 30 days
     const fetchLatPulldown = async () => {
       const response = await fetch(
-        `http://localhost:3000/exercise/${username}/specific/Lat Pulldown`,
+        `https://toned-mern.herokuapp.com/exercise/${username}/specific/Lat Pulldown`,
         {
           method: "GET",
           headers: {
@@ -176,7 +176,7 @@ export default function PastWorkouts() {
     // Get Pull-Ups Data from past 30 days
     const fetchPullUps = async () => {
       const response = await fetch(
-        `http://localhost:3000/exercise/${username}/specific/Pull-Ups`,
+        `https://toned-mern.herokuapp.com/exercise/${username}/specific/Pull-Ups`,
         {
           method: "GET",
           headers: {
@@ -193,7 +193,7 @@ export default function PastWorkouts() {
     // Get Push-Ups Data from past 30 days
     const fetchPushUps = async () => {
       const response = await fetch(
-        `http://localhost:3000/exercise/${username}/specific/Push-Ups`,
+        `https://toned-mern.herokuapp.com/exercise/${username}/specific/Push-Ups`,
         {
           method: "GET",
           headers: {

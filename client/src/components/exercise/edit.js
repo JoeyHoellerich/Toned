@@ -21,7 +21,7 @@ export default function Edit() {
     async function fetchData() {
       const id = params.id.toString()
       const response = await fetch(
-        `http://localhost:3000/exercise/id/${params.id.toString()}`
+        `https://toned-mern.herokuapp.com/exercise/id/${params.id.toString()}`
       )
 
       if (!response.ok) {
@@ -48,7 +48,7 @@ export default function Edit() {
   async function onDelete(e) {
     e.preventDefault()
 
-    await fetch(`http://localhost:3000/exercise/${id}`, {
+    await fetch(`https://toned-mern.herokuapp.com/exercise/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -76,7 +76,7 @@ export default function Edit() {
     }
 
     // This will send a post request to update the data in the database.
-    await fetch(`http://localhost:3000/exercise/${params.id}`, {
+    await fetch(`https://toned-mern.herokuapp.com/exercise/${params.id}`, {
       method: "PUT",
       body: JSON.stringify(editedExercise),
       headers: {

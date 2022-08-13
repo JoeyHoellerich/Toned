@@ -19,7 +19,7 @@ export default function EditWorkout(props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`http://localhost:3000/exercise/id/${id}`, {
+      const response = await fetch(`https://toned-mern.herokuapp.com/exercise/id/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -54,7 +54,7 @@ export default function EditWorkout(props) {
     }
 
     // This will send a post request to update the data in the database.
-    await fetch(`http://localhost:3000/exercise/${id}`, {
+    await fetch(`https://toned-mern.herokuapp.com/exercise/${id}`, {
       method: "PUT",
       body: JSON.stringify(editedExercise),
       headers: {
@@ -69,7 +69,7 @@ export default function EditWorkout(props) {
     e.preventDefault()
 
     // This will send a post request to update the data in the database.
-    await fetch(`http://localhost:3000/exercise/${id}`, {
+    await fetch(`https://toned-mern.herokuapp.com/exercise/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

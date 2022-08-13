@@ -51,7 +51,7 @@ export default function CreateUser() {
 
     const newUser = { ...form }
 
-    let response = await fetch(`http://localhost:3000/user/${form.username}`, {
+    let response = await fetch(`https://toned-mern.herokuapp.com/user/${form.username}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -63,7 +63,7 @@ export default function CreateUser() {
     if (userObject.length > 0) {
       setInvalidUser(true)
     } else {
-      let newUserResponse = await fetch("http://localhost:3000/user", {
+      let newUserResponse = await fetch("https://toned-mern.herokuapp.com/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -2,21 +2,14 @@ import React from 'react'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button } from '@mui/material' 
 import { useNavigate } from "react-router"
 
-function createData(set, reps, weight) {
-    return { set, reps, weight };
-}
 
-const rows = [
-createData(1, 10, 100),
-createData(2, 10, 125),
-createData(3, 5, 50),
-createData(4, 10, 100),
-createData(5, 20, 500),
-];
-
-export default function EditTable() {
+export default function EditTable(props) {
 
     const navigate = useNavigate();
+
+    function toEdit(url){
+        navigate(url)
+      }
 
     const tableHeadStyle = [
         {backgroundColor: "#F6C971"},
@@ -53,10 +46,6 @@ export default function EditTable() {
         {width: "15%"}
     ]
 
-    function toEdit(){
-        navigate("/editworkout/123")
-    }
-
     return(
         <TableContainer>
             <Table>
@@ -69,14 +58,16 @@ export default function EditTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row, index) => {
+                    {props.data.map((row, index) => {
+
+                        let url = `/editworkout/${row._id}`
                         return(
                             <TableRow sx = {tableBodyStyle} key={index}>
-                                <TableCell sx ={tableBodyCellStyle} align="left">{row.set}</TableCell>
+                                <TableCell sx ={tableBodyCellStyle} align="left">{row.sets}</TableCell>
                                 <TableCell sx ={tableBodyCellStyle} align="left">{row.reps}</TableCell>
                                 <TableCell sx ={tableBodyCellStyle} align="left">{row.weight}</TableCell>
                                 <TableCell sx ={tableBodyButtonCellStyle} align="center">
-                                    <Button variant="contained" onClick={toEdit}>Edit</Button>
+                                    <Button variant="contained" onClick={() => toEdit(url)}>Edit</Button>
                                 </TableCell>
                             </TableRow>
                         )

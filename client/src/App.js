@@ -1,4 +1,4 @@
-import { React, useState, Fragment } from "react"
+import { React, useState } from "react"
 import { Route, Routes } from "react-router-dom"
 import "./App.css"
 
@@ -7,13 +7,13 @@ import UserContext from "./context/UserContext"
 
 // We import all the components we need in our app
 import Edit from "./components/exercise/edit"
-import Create from "./components/exercise/create"
+import CreateWorkout from "./components/exercise/CreateWorkout"
 import CreateUser from "./components/user/createUser"
 import PastWorkouts from "./components/PastWorkouts/PastWorkouts"
 import EditWorkout from "./components/exercise/EditWorkout"
 import Login from "./components/user/Login"
 import ErrorPage from "./components/error/ErrorPage"
-import ExercisePage from "./components/exercise/ExercisePage"
+import WorkoutPage from "./components/exercise/WorkoutPage"
 
 function App() {
   const [user, setUser] = useState([])
@@ -49,13 +49,13 @@ function App() {
         />
         <Route
           exact
-          path="/exercisepage"
+          path="/workouts"
           element={
             user.length > 0 ? (
               <UserContext.Provider
                 value={{ user: user, updateUser: updateUser }}
               >
-                <ExercisePage />
+                <WorkoutPage />
               </UserContext.Provider>
             ) : (
               <ErrorPage />
@@ -69,7 +69,7 @@ function App() {
               <UserContext.Provider
                 value={{ user: user, updateUser: updateUser }}
               >
-                <Create />
+                <CreateWorkout />
               </UserContext.Provider>
             ) : (
               <ErrorPage />
@@ -98,6 +98,20 @@ function App() {
                 value={{ user: user, updateUser: updateUser }}
               >
                 <EditWorkout />
+              </UserContext.Provider>
+            ) : (
+              <ErrorPage />
+            )
+          }
+        />
+        <Route
+          path="/edit/:id"
+          element={
+            user.length > 0 ? (
+              <UserContext.Provider
+                value={{ user: user, updateUser: updateUser }}
+              >
+                <Edit />
               </UserContext.Provider>
             ) : (
               <ErrorPage />

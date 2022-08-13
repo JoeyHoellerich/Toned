@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useState, useContext } from "react"
 import { Container, Box } from "@mui/material"
 import { useNavigate } from "react-router"
 
@@ -11,7 +11,7 @@ export default function Login() {
 
   const navigate = useNavigate()
 
-  const [userInput, setUserInput] = useState("")
+  const [userInput, setUserInput] = useState({ username: "" })
   const [isUser, setIsUser] = useState(false)
 
   function changeUser(e) {
@@ -35,10 +35,12 @@ export default function Login() {
     // returns response as an array of objects, for user it is just 1 object
     let userObject = await response.json()
 
+    // bug here. If you type in the input and clear it and hit go
+    // you'll be logged in
     // if the user exists
     if (userObject.length > 0) {
       updateUser(userObject)
-      navigate(`/exercisepage`)
+      navigate(`/workouts`)
     } else {
       setIsUser(true)
     }
@@ -57,15 +59,15 @@ export default function Login() {
       <Container>
         <form onSubmit={onSubmit}>
           <Box sx={inputBoxStyle}>
-            <label className="center">
+            <label className="center" htmlFor="username">
               <h2 className="tonedInputLabel">Username</h2>
               <Box sx={{ display: "flex" }}>
                 <input
                   className="tonedInput"
-                  name="user"
+                  name="username"
                   id="username-input"
                   type="text"
-                  value={userInput}
+                  value={userInput.username}
                   onChange={changeUser}
                 />
                 <button type="submit" className="loginBtn">

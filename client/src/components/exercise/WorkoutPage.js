@@ -38,7 +38,7 @@ export default function WorkoutPage() {
   // This method fetches the records from the database
   useEffect(() => {
     async function getExercises() {
-      const response = await fetch(`http://localhost:3000/exercise/${username}`)
+      const response = await fetch(`https://toned-mern.herokuapp.com/exercise/${username}`)
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`
@@ -56,7 +56,7 @@ export default function WorkoutPage() {
 
   // This method will delete a record
   async function deleteExercise(id) {
-    await fetch(`http://localhost:3000/exercise/${id}`, {
+    await fetch(`https://toned-mern.herokuapp.com/exercise/${id}`, {
       method: "DELETE",
     })
 

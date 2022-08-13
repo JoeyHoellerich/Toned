@@ -10,7 +10,7 @@ export default function ShowUser() {
   useEffect(() => {
     // fetch all users
     async function getUser() {
-      const response = await fetch(`http://localhost:3000/user`)
+      const response = await fetch(`https://toned-mern.herokuapp.com/user`)
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`

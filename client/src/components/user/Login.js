@@ -89,6 +89,7 @@ export default function Login() {
             <div className="center">
               <h2 className="tonedLabel">Don't have an account?</h2>
               <button
+                type = 'button'
                 onClick={toCreateAccount}
                 className="tonedButton"
                 style={{ marginBottom: "5%" }}

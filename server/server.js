@@ -13,6 +13,7 @@ const methodOverride = require("method-override")
 // MIDDLEWARE
 app.use(methodOverride("_method"))
 app.use(cors())
+app.use(express.static('../client/build'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 

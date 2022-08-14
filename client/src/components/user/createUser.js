@@ -83,7 +83,8 @@ export default function CreateUser() {
         age: "",
         weight: "",
       })
-      navigate("/workouts")
+      alert("User Successfully created! Log in to continue!")
+      navigate("/")
     }
   }
 

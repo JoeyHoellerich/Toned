@@ -29,11 +29,7 @@ export default function ShowUser() {
   function userList() {
     return user.map((eachUser) => {
       return (
-        <option
-          key={eachUser._id}
-          defaultValue={null}
-          value={eachUser.username}
-        >
+        <option key={eachUser._id} value={eachUser.username}>
           {eachUser.username}
         </option>
       )

@@ -65,57 +65,41 @@ function App() {
         <Route
           path="/add"
           element={
-            user.length > 0 ? (
-              <UserContext.Provider
-                value={{ user: user, updateUser: updateUser }}
-              >
-                <CreateWorkout />
-              </UserContext.Provider>
-            ) : (
-              <ErrorPage />
-            )
+            <UserContext.Provider
+              value={{ user: user, updateUser: updateUser }}
+            >
+              <CreateWorkout />
+            </UserContext.Provider>
           }
         />
         <Route
           path="/pastworkouts"
           element={
-            user.length > 0 ? (
-              <UserContext.Provider
-                value={{ user: user, updateUser: updateUser }}
-              >
-                <PastWorkouts />
-              </UserContext.Provider>
-            ) : (
-              <ErrorPage />
-            )
+            <UserContext.Provider
+              value={{ user: user, updateUser: updateUser }}
+            >
+              <PastWorkouts />
+            </UserContext.Provider>
           }
         />
         <Route
           path="/editworkout/:id"
           element={
-            user.length > 0 ? (
-              <UserContext.Provider
-                value={{ user: user, updateUser: updateUser }}
-              >
-                <EditWorkout />
-              </UserContext.Provider>
-            ) : (
-              <ErrorPage />
-            )
+            <UserContext.Provider
+              value={{ user: user, updateUser: updateUser }}
+            >
+              <EditWorkout />
+            </UserContext.Provider>
           }
         />
         <Route
           path="/edit/:id"
           element={
-            user.length > 0 ? (
-              <UserContext.Provider
-                value={{ user: user, updateUser: updateUser }}
-              >
-                <Edit />
-              </UserContext.Provider>
-            ) : (
-              <ErrorPage />
-            )
+            <UserContext.Provider
+              value={{ user: user, updateUser: updateUser }}
+            >
+              <Edit />
+            </UserContext.Provider>
           }
         />
       </Routes>

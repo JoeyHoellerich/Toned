@@ -1,6 +1,6 @@
 import { Container, Box } from "@mui/material"
 import React, { useEffect, useState, useContext } from "react"
-import { useParams, useNavigate } from "react-router"
+import { useNavigate } from "react-router"
 import { Link } from "react-router-dom"
 import UserContext from "../../context/UserContext"
 import Navbar from "../navbar/Nav"
@@ -61,7 +61,7 @@ export default function WorkoutPage() {
         <h1 className="recent">Welcome!</h1>
         <p className="welcome">
           You don't appear to have any previous workouts recorded. Try adding a
-          new workout using the "Add Workout" button at the bottom of the screen
+          new workout using the "Add Workout" button.
         </p>
       </div>
     )

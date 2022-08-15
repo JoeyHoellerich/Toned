@@ -10,13 +10,14 @@ export default function Login() {
   let { user, updateUser } = useContext(UserContext)
 
   const navigate = useNavigate()
+  console.log({ user })
   console.log(user)
   const [userInput, setUserInput] = useState({ username: "" })
   const [isUser, setIsUser] = useState(false)
 
   function changeUser(e) {
     setUserInput(e.target.value)
-    if (userInput === "") {
+    if (userInput.username === "") {
       setIsUser(false)
     }
   }
@@ -34,6 +35,7 @@ export default function Login() {
 
     // returns response as an array of objects, for user it is just 1 object
     let userObject = await response.json()
+    console.log(userObject)
 
     // bug here. If you type in the input and clear it and hit go
     // you'll be logged in
@@ -49,11 +51,11 @@ export default function Login() {
   function toCreateAccount() {
     navigate("/createuser")
   }
-
+  console.log({ userInput })
   const inputBoxStyle = [{ margin: "auto" }, { paddingBottom: "15px" }]
 
   return (
-    <div>
+    <div className="loginPage">
       <img src={tonedTitle} alt="toned" className="center" />
       <img src={tonedLogo} alt="toned logo" className="center loginImg" />
       <Container>

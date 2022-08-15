@@ -16,7 +16,7 @@ export default function Edit() {
   const params = useParams()
   const { id } = useParams()
   const navigate = useNavigate()
-
+  console.log(form)
   useEffect(() => {
     async function fetchData() {
       const id = params.id.toString()

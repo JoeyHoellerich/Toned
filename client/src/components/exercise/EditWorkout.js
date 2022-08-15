@@ -38,7 +38,7 @@ export default function EditWorkout(props) {
     }
 
     fetchData()
-  }, [])
+  }, [id])
 
   const inputBoxStyle = [{ margin: "auto" }, { paddingBottom: "15px" }]
 

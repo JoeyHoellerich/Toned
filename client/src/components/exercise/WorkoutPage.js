@@ -1,6 +1,6 @@
 import { Container, Box } from "@mui/material"
 import React, { useEffect, useState, useContext } from "react"
-import { useParams, useNavigate } from "react-router"
+import { useNavigate } from "react-router"
 import { Link } from "react-router-dom"
 import UserContext from "../../context/UserContext"
 import Navbar from "../navbar/Nav"
